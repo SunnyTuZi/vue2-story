@@ -5,8 +5,10 @@ import router from './router'
 import store from './store'
 import './until/axios-interceptor'
 import Mint from 'mint-ui'
+// import "./public/style/common.less";
 import  'mint-ui/lib/style.css'
 import './public/style/font/iconfont.css'
+
 
 
 Vue.config.productionTip = false

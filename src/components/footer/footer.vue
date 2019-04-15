@@ -7,8 +7,10 @@
   <footer class="footer-box">
     <mt-tabbar v-model="selected">
       <mt-tab-item id="index">
-        <span class="iconfont icon-index"></span>
-        首页
+        <router-link to="/">
+          <span class="iconfont icon-index"></span>
+          首页
+        </router-link>
       </mt-tab-item>
       <mt-tab-item id="topic">
         <span class="iconfont icon-topic"></span>
@@ -23,8 +25,10 @@
         消息
       </mt-tab-item>
       <mt-tab-item id="me">
-        <span class="iconfont icon-me"></span>
-        我的
+        <router-link to="/user">
+          <span class="iconfont icon-me"></span>
+          我的
+        </router-link>
       </mt-tab-item>
     </mt-tabbar>
   </footer>
