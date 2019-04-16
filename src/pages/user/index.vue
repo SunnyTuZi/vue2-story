@@ -16,7 +16,7 @@
       </p>
     </div>
     <div class="user-info item-list">
-      <mt-cell title="基本信息" is-link></mt-cell>
+      <router-link to="./user/edit"><mt-cell title="基本信息" is-link></mt-cell></router-link>
       <mt-cell-detail label="性别" value="男"></mt-cell-detail>
       <mt-cell-detail label="年龄" value="25" ></mt-cell-detail>
       <mt-cell-detail label="邮箱" value="919869469@qq.com"></mt-cell-detail>
