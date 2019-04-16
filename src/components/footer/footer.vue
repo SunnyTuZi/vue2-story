@@ -9,25 +9,25 @@
       <mt-tab-item id="index">
         <router-link to="/">
           <span class="iconfont icon-index"></span>
-          首页
+          <span class="con">首页</span>
         </router-link>
       </mt-tab-item>
       <mt-tab-item id="topic">
         <span class="iconfont icon-topic"></span>
-        话题
+        <span class="con">话题</span>
       </mt-tab-item>
       <mt-tab-item id="bubble">
         <span class="iconfont icon-bubble"></span>
-        广场
+        <span class="con">广场</span>
       </mt-tab-item>
       <mt-tab-item id="msg">
         <span class="iconfont icon-msg"></span>
-        消息
+        <span class="con">消息</span>
       </mt-tab-item>
       <mt-tab-item id="me">
         <router-link to="/user">
           <span class="iconfont icon-me"></span>
-          我的
+          <span class="con">我的</span>
         </router-link>
       </mt-tab-item>
     </mt-tabbar>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-  import { Tabbar, TabItem } from 'mint-ui';
 
   export default {
     name: "MyFooter",
@@ -43,21 +42,27 @@
       return {
         selected: 'index'
       }
-    },
-    components: {
-      Tabbar,
-      TabItem
     }
 
   }
 </script>
 
 <style scoped lang="less">
+  @import "../../public/style/mixin";
   .footer-box {
     .iconfont {
       display: block;
-      font-size: 1.5rem;
-      margin-bottom: .3125rem;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .con{
+      font-size: 14px;
+    }
+    .is-selected{
+      .iconfont,.con{
+        color: @theme-color;
+      }
+
     }
   }
 
