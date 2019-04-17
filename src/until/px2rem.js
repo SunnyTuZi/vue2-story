@@ -1,6 +1,6 @@
 /**
  * Create by Zwl on 2019/4/16
- * @Description:
+ * @Description: rem适配
  */
 //
 'use strict';
