@@ -47,6 +47,7 @@
     .continer{
       display: flex;
       overflow-y: auto;
+      flex-grow: 1;
     }
     .footer{
       display: flex;

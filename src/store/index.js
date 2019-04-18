@@ -14,9 +14,9 @@ import actions from './action'
 Vue.use(Vuex)
 
 const state = {
-  token: String
+  token: '',
+  userInfo: {},
 }
-
 export default new Vuex.Store({
   state,
   getters,

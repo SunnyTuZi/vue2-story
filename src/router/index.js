@@ -8,6 +8,7 @@ const hellon = r => require.ensure([], () => r(require('../components/HelloWorld
 const userIndex = r => require.ensure([], () => r(require('../pages/user/index')), 'userIndex')
 const userEdit = r => require.ensure([], () => r(require('../pages/user/Edit')), 'userEdit')
 const userLogin = r => require.ensure([], () => r(require('../pages/user/Login')), 'userLogin')
+const userDynamic = r => require.ensure([], () => r(require('../pages/user/Dynamic')), 'userDynamic')
 
 export default new Router({
   routes: [
@@ -26,6 +27,10 @@ export default new Router({
     {
       path:'/user/login',
       component: userLogin
+    },
+    {
+      path:'/user/dynamic',
+      component: userDynamic
     }
   ]
 })

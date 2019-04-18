@@ -1,15 +1,13 @@
 <template>
   <div class="box">
-    <mt-header title="编辑个人资料">
-        <router-link to="/user" slot="left">
-          <mt-button icon="back"></mt-button>
-        </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
+    <my-mt-header title="编辑个人资料"></my-mt-header>
     <section class="user-edit-box">
-      <div class="mint-cell-div t-center">
-        <img src="" alt="" class="img-head" />
-      </div>
+      <mt-cell title="用户头像" is-link class="head-cell">
+        <span>
+          <img slot="icon" src="" class="head-img">
+        </span>
+        <input type="file" accept="image/*" name="file" class="head-input" id="uploadAvatar" @change="uploadAvatar" />
+      </mt-cell>
       <mt-field label="用户名" placeholder="请输入用户名" type="text"></mt-field>
       <mt-field label="邮箱" placeholder="请输入邮箱" type="email"></mt-field>
       <div class="mint-cell mint-field">
@@ -39,6 +37,9 @@
       <mt-field label="所在地区" placeholder="请选择所在地区" type="text" readonly="readonly" @click.native.capture="selectAddress"></mt-field>
       <mt-field label="个性签名" placeholder="写一句话~让别人更了解你吧" type="textarea" rows="4"></mt-field>
     </section>
+    <div class="edit-btn">
+      <mt-button type="primary" disabled>确认修改</mt-button>
+    </div>
     <mt-popup v-model="birthdayPopup" position="bottom">
       <mt-picker :slots="slots1" :visibleItemCount="3"></mt-picker>
     </mt-popup>
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
     export default {
       name: "",
       data() {
@@ -92,12 +94,27 @@
           ]
         };
       },
+      computed: {
+        ...mapState(['userInfo'])
+      },
       methods:{
         selectBirthday(){
           this.birthdayPopup = true;
         },
         selectAddress(){
           this.addressPopup = true;
+        },
+        uploadAvatar(){
+          let file = document.querySelector('#uploadAvatar');
+          let data = new FormData();
+          data.append('file',file.files[0]);
+          data.append('id',this.userInfo._id);
+          this.$axios.post('/api/user/uploadAvatar',data).then(
+            result =>{
+              if(result.data.status == 200){
+              }
+            }
+          )
         }
       }
     }
@@ -106,9 +123,26 @@
 <style scoped lang="less">
   @import "../../public/style/mixin";
   .box {
-    width: 100%;
     .user-edit-box{
+      padding-top: 10px;
       background: #FFFFFF;
+      .head-cell{
+        padding: 10px 0;
+        .head-img{
+          .img-raduis(60px,#dddddd)
+        }
+        .head-input{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+      }
+      .mint-cell{
+        border-bottom: 1px solid #dddddd;
+      }
     }
     .mint-cell-div{
       padding: 20px 0;
@@ -126,6 +160,13 @@
     .mint-radiolist-label{
       padding-left: 0;
       padding-right: 10px;
+    }
+    .edit-btn{
+      margin-top: 20px;
+      padding: 0 20px;
+      button{
+        width: 100%;
+      }
     }
   }
 </style>
