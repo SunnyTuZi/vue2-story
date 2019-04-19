@@ -6,7 +6,7 @@
 <template>
   <section class="user-box">
     <div class="user-head item-list">
-      <p class="img-box"><img :src="imgBaseUrl + userInfo.head" alt="" class="head-img"/></p>
+      <p class="img-box"><img :src="userInfo.head ? imgBaseUrl + userInfo.head:''" alt="" class="head-img"/></p>
       <div class="smiple-box" v-if="token">
         <p class="nickname">SunnyTuZi</p>
         <p class="synopsis">人生的起点不是出生那一刻，而是你感悟到你活着的意义那一瞬间！</p>
@@ -44,7 +44,7 @@
       }
     },
     mounted(){
-      console.log(this.config)
+
     },
     computed:{
       ...mapState(['token','userInfo'])
@@ -75,26 +75,29 @@
           border: 1px solid #eee;
         }
       }
-      .nickname{
-        font-weight: 500;
-        font-size: 24px;
-      }
-      .synopsis{
-        font-size: 14px;
-      }
-      .follow{
-        .trim{
-          color: @theme-color;
-          margin: 10px;
-          font-size: 16px;
+      .smiple-box{
+        text-align: center;
+        .nickname{
+          font-weight: 500;
+          font-size: 24px;
         }
-        a{
-          color: @theme-color;
-          font-size: 12px;
+        .synopsis{
+          font-size: 14px;
         }
-      }
-      p{
-        margin-bottom: 10px;
+        .follow{
+          .trim{
+            color: @theme-color;
+            margin: 10px;
+            font-size: 16px;
+          }
+          a{
+            color: @theme-color;
+            font-size: 12px;
+          }
+        }
+        p{
+          margin-bottom: 10px;
+        }
       }
       .login-btn{
         color: @theme-color;

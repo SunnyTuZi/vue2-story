@@ -30,6 +30,8 @@
 
 <script>
     import {mapMutations} from 'vuex'
+    import {setStore} from "../../until/localStorage";
+
     export default {
         name: "login",
         data(){
@@ -58,7 +60,8 @@
                   if(result.data.status == 200){
                     this.SET_TOKEN(result.data.token);
                     this.GET_USERINFO(result.data.data);
-                    this.$localStorage.setItem('userInfo',result.data.data);
+                    setStore('userInfo',result.data.data);
+                    setStore('token',result.data.token);
                     this.$router.back(-1);
                   }else if(result.data.status == 500){
                     this.$toast({

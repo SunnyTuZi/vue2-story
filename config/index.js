@@ -17,12 +17,19 @@ module.exports = {
         pathRewrite: {
           '^/api': '/api'
         }
+      },
+      '/images': {
+        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
+        changeOrigin: true,
+        pathRewrite: {
+          '^/images': '/images'
+        }
       }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

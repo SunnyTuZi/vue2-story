@@ -3,6 +3,7 @@
  * @Description:
  */
 
+
 'use strict';
 
 import Vue from 'vue'
@@ -10,12 +11,14 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import getters from './getter'
 import actions from './action'
+import { getStore} from "../until/localStorage";
+
 
 Vue.use(Vuex)
 
 const state = {
-  token: '',
-  userInfo: {},
+  token: getStore('token')||'',
+  userInfo: JSON.parse(getStore('userInfo'))||{}
 }
 export default new Vuex.Store({
   state,
