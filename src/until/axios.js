@@ -6,9 +6,10 @@
 
 'use strict';
 
-import { Toast } from 'mint-ui';
+import { Toast } from 'mint-ui'
 import axios from 'axios'
-import { getStore } from "./localStorage"
+import router from '../router'
+import { getStore, setStore } from "./localStorage"
 
 
 const _axios = axios.create({
@@ -19,13 +20,23 @@ const _axios = axios.create({
 const commonError = (error) =>{
   let res = error.response;
   if(res.status == 401){
-    Toast({
-      message: res.data.msg,
-      position: 'middle',
-      duration: 2000
-    });
+    if(getStore('token')){
+      Toast({
+        message: res.data.msg,
+        position: 'middle',
+        duration: 2000
+      });
+    }else{
+      Toast({
+        message: '请先登录',
+        position: 'middle',
+        duration: 2000
+      });
+    }
+    setStore('token','');
+    router.push('/user/login')
   }
-  return Promise.reject(error)
+  return new Promise.reject(error)
 }
 
 // 添加一个请求拦截器
@@ -41,12 +52,20 @@ _axios.interceptors.request.use(function (config) {
 
 // 添加一个响应拦截器
 _axios.interceptors.response.use(function (response) {
-  if(response.data.status != 200){
+  if(response.status != 200){
     Toast({
-      message: response.data.msg,
+      message: '请求失败，请稍后重试',
       position: 'middle',
       duration: 2000
     });
+  }else{
+    if(response.data.status != 200){
+      Toast({
+        message: response.data.msg,
+        position: 'middle',
+        duration: 2000
+      });
+    }
   }
   return response;
 }, function (error) {

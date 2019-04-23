@@ -24,6 +24,13 @@ module.exports = {
         pathRewrite: {
           '^/images': '/images'
         }
+      },
+      '/javascripts': {
+        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
+        changeOrigin: true,
+        pathRewrite: {
+          '^/javascripts': '/javascripts'
+        }
       }
     },
 

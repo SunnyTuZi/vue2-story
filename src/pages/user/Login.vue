@@ -49,7 +49,7 @@
         },
 
         methods:{
-            ...mapMutations(['SET_TOKEN','GET_USERINFO']),
+            ...mapMutations(['SET_TOKEN','SET_USERINFO']),
             getCode(){
                 this.$axios.get('api/user/getCode').then((result) => {
                   this.imgSrc = result.data.code;
@@ -59,7 +59,7 @@
               this.$axios.post('api/user/login', this.loginForm).then((result) =>{
                   if(result.data.status == 200){
                     this.SET_TOKEN(result.data.token);
-                    this.GET_USERINFO(result.data.data);
+                    this.SET_USERINFO(result.data.data);
                     setStore('userInfo',result.data.data);
                     setStore('token',result.data.token);
                     this.$router.back(-1);

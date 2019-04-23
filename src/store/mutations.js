@@ -6,7 +6,8 @@
 
 'use strict';
 
-import {SET_TOKEN, GET_USERINFO} from "./mutation-type";
+import {SET_TOKEN, SET_USERINFO} from "./mutation-type";
+import {setStore} from "../until/localStorage";
 
 export default {
   [SET_TOKEN](state,token){
@@ -14,7 +15,10 @@ export default {
       state.token = token;
     }
   },
-  [GET_USERINFO](state,info){
-    state.userInfo = {...info};
+  [SET_USERINFO](state,info){
+    //合并对象，防止编辑的时候数据丢失
+    state.userInfo = Object.assign({},state.userInfo,info);
+    debugger;
+    setStore('userInfo',state.userInfo);
   }
 }

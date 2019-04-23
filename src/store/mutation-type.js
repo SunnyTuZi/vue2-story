@@ -6,9 +6,9 @@
 'use strict';
 
 const SET_TOKEN = 'SET_TOKEN';
-const GET_USERINFO = 'GET_USERINFO';
+const SET_USERINFO = 'SET_USERINFO';
 
 export {
   SET_TOKEN,
-  GET_USERINFO
+  SET_USERINFO
 }
