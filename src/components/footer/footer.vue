@@ -25,7 +25,7 @@
         <span class="con">消息</span>
       </mt-tab-item>
       <mt-tab-item id="me">
-        <router-link to="./user">
+        <router-link to="/user">
           <span class="iconfont icon-me"></span>
           <span class="con">我的</span>
         </router-link>

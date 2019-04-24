@@ -5,11 +5,14 @@
 
 <template>
   <header class="header-box">
-    <mt-header :title="title">
-      <router-link to="" slot="left" v-if="isBack">
-        <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right" v-if="isRight"></mt-button>
+    <mt-header fixed :title="title">
+      <div slot="left" >
+        <mt-button icon="back"  v-if="leftSlot == 'back'" @click="$router.back(-1)"></mt-button>
+        <mt-button icon="search"  v-if="leftSlot == 'search'" @click="$router.push({path:'/user'})"></mt-button>
+      </div>
+      <div slot="right">
+        <mt-button  v-if="rightSlot == 'user'" class="iconfont icon-me" @click="$router.push({path:'/user'})" ></mt-button>
+      </div>
     </mt-header>
   </header>
 </template>
@@ -19,18 +22,24 @@
     name: "MyMtHeader",
     props:{
       title: String,
-      isBack:{
-        type: Boolean,
-        default: true
+      leftSlot:{
+        type: String,
+        default: 'back'
       },
-      isRight: {
-        type:  Boolean,
-        default: false
+      rightSlot:{
+        type: String,
+        default: ''
       }
+    },
+    mounted(){
     }
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .header-box{
+    .icon-me{
+      font-size: 24px;
+    }
+  }
 </style>

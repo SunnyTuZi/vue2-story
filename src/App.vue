@@ -48,6 +48,7 @@
       display: flex;
       overflow-y: auto;
       flex-grow: 1;
+      padding-top: 35px;
     }
     .footer{
       display: flex;

@@ -21,10 +21,11 @@
     <div class="user-info item-list">
       <router-link to="./user/edit"><mt-cell title="基本信息" is-link></mt-cell></router-link>
       <mt-cell-detail label="性别" :value="userInfo.sex == 1 ? '男' : '女'"></mt-cell-detail>
-      <mt-cell-detail label="出生年月" :value="userInfo.age" ></mt-cell-detail>
+      <mt-cell-detail label="出生年月" :value="userInfo.dateOfBirth" ></mt-cell-detail>
       <mt-cell-detail label="邮箱" :value="userInfo.email"></mt-cell-detail>
       <mt-cell-detail label="所在地" :value="userInfo.address"></mt-cell-detail>
       <mt-cell-detail label="创建时间" value="2019-02-25" class="border-bottom"></mt-cell-detail>
+      <router-link to="./user/dynamic"><mt-cell title="我的收藏" is-link></mt-cell></router-link>
       <router-link to="./user/dynamic"><mt-cell title="我的动态" is-link></mt-cell></router-link>
       <router-link to="./user/dynamic"><mt-cell title="我的话题关注" is-link></mt-cell></router-link>
     </div>
@@ -59,6 +60,7 @@
   @import "../../public/style/mixin";
   .user-box {
     width: 100%;
+    margin-top: -35px;
     .user-head {
       .flex;
       flex-direction: column;

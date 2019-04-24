@@ -7,17 +7,18 @@ import { Toast } from 'mint-ui';
 Vue.use(Router);
 
 
-const hellon = () => import('../components/HelloWorld');
 const userIndex = () => import('../pages/user/index');
 const userEdit = () => import('../pages/user/Edit');
 const userLogin = () => import('../pages/user/Login');
 const userDynamic = () => import('../pages/user/Dynamic');
+const storyList = () => import('../pages/story/List');
+const search = () => import('../pages/search/Search');
 
 const router = new Router({
   routes: [
     {
       path: '/',
-      component: hellon
+      component: storyList
     },
     {
       path: '/user',
@@ -40,7 +41,16 @@ const router = new Router({
       meta:{
         auth: true
       }
+    },
+    {
+      path:'/story/list',
+      component: storyList
+    },
+    {
+      path:'./search',
+      component: search
     }
+
   ]
 });
 

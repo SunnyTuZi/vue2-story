@@ -15,10 +15,11 @@ import { getStore} from "../until/localStorage";
 
 
 Vue.use(Vuex)
-
 const state = {
   token: getStore('token')||'',
-  userInfo: JSON.parse(getStore('userInfo'))||{}
+  userInfo: JSON.parse(getStore('userInfo'))||{},
+  provinces: null,
+  citys: null
 }
 export default new Vuex.Store({
   state,

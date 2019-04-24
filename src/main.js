@@ -13,11 +13,14 @@ import MyMtHeader from './components/header/Header';
 Vue.config.productionTip = false
 
 Vue.use(Mint);
+
+//设置全局共用组件
 Vue.component('MyMtHeader',MyMtHeader);
 
+//设置全局方法
 Vue.prototype.$axios = axios;
 Vue.prototype.$localStorage = window.localStorage;
-/* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,
