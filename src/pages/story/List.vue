@@ -5,7 +5,7 @@
 
 <template>
   <section class="box">
-    <my-mt-header :leftSlot="'search'" :rightSlot="'user'" title="故事汇"></my-mt-header>
+    <my-mt-header :leftSlot="'search'" :rightSlot="'send'" title="故事汇"></my-mt-header>
     <article class="story-cell">
       <h1 class="title">这是一个恐怖的鬼故事！！</h1>
       <div class="content">
@@ -183,7 +183,18 @@
 
 <script>
   export default {
-    name: "list"
+    mounted(){
+      this.getStoryList();
+    },
+    methods:{
+      getStoryList(){
+        this.$axios.get('api/story/getList',{}).then(
+          (result) =>{
+            debugger;
+          }
+        )
+      }
+    }
   }
 </script>
 

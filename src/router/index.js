@@ -13,6 +13,7 @@ const userLogin = () => import('../pages/user/Login');
 const userDynamic = () => import('../pages/user/Dynamic');
 const storyList = () => import('../pages/story/List');
 const search = () => import('../pages/search/Search');
+const storyAdd = () => import('../pages/story/Add');
 
 const router = new Router({
   routes: [
@@ -45,6 +46,10 @@ const router = new Router({
     {
       path:'/story/list',
       component: storyList
+    },
+    {
+      path:'/story/add',
+      component: storyAdd
     },
     {
       path:'./search',

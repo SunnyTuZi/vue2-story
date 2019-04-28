@@ -12,6 +12,8 @@
       </div>
       <div slot="right">
         <mt-button  v-if="rightSlot == 'user'" class="iconfont icon-me" @click="$router.push({path:'/user'})" ></mt-button>
+        <mt-button  v-if="rightSlot == 'send'" @click="$router.push({path:'/story/add'})" >发表故事</mt-button>
+        <mt-button  v-if="rightSlot == 'addStory'" @click="sendStory">发表</mt-button>
       </div>
     </mt-header>
   </header>
@@ -32,6 +34,11 @@
       }
     },
     mounted(){
+    },
+    methods:{
+      sendStory(){
+        this.$emit('addStory');
+      }
     }
   }
 </script>

@@ -5,11 +5,7 @@
 
 <template>
     <div class="box">
-      <mt-header title="登陆/注册">
-        <router-link to="" slot="left">
-          <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-        </router-link>
-      </mt-header>
+      <my-mt-header title="登陆/注册"></my-mt-header>
       <div class="form-box">
         <mt-field label="用户名" placeholder="请输入用户名" v-model="loginForm.account" type="text"></mt-field>
         <mt-field label="密码" placeholder="请输入密码" v-model="loginForm.psw" type="password"></mt-field>
