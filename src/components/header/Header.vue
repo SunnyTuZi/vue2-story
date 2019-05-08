@@ -12,8 +12,8 @@
       </div>
       <div slot="right">
         <mt-button  v-if="rightSlot == 'user'" class="iconfont icon-me" @click="$router.push({path:'/user'})" ></mt-button>
-        <mt-button  v-if="rightSlot == 'send'" @click="$router.push({path:'/story/add'})" >发表故事</mt-button>
-        <mt-button  v-if="rightSlot == 'addStory'" @click="sendStory">发表</mt-button>
+        <mt-button  v-if="rightSlot == 'send'" class="iconfont icon-write" @click="$router.push({path:'/story/add'})" ></mt-button>
+        <mt-button  v-if="rightSlot == 'addStory'" @click="sendStory" class="btn-text">发表</mt-button>
       </div>
     </mt-header>
   </header>
@@ -47,6 +47,12 @@
   .header-box{
     .icon-me{
       font-size: 24px;
+    }
+    .btn-text{
+      font-size: 12px;
+    }
+    .icon-write{
+      font-size: 20px;
     }
   }
 </style>

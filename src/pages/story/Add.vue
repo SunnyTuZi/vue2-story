@@ -5,7 +5,7 @@
 
 <template>
   <section class="box">
-    <my-mt-header title="发表故事" :rightSlot="'addStory'" @addStory="addStory" ></my-mt-header>
+    <my-mt-header title="编辑故事" :rightSlot="'addStory'" @addStory="addStory" ></my-mt-header>
     <section class="story-form">
       <mt-field placeholder="请输入故事名称" class="cell" v-model="storyForm.storyName"></mt-field>
       <div class="cell editor-box">

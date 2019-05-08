@@ -48,23 +48,17 @@
             ...mapMutations(['SET_TOKEN','SET_USERINFO']),
             getCode(){
                 this.$axios.get('api/user/getCode').then((result) => {
-                  this.imgSrc = result.data.code;
+                  this.imgSrc = result.data.codeImg;
                 });
             },
             login(){
               this.$axios.post('api/user/login', this.loginForm).then((result) =>{
-                  if(result.data.status == 200){
+                  if(result.data.code == 1){
                     this.SET_TOKEN(result.data.token);
                     this.SET_USERINFO(result.data.data);
                     setStore('userInfo',result.data.data);
                     setStore('token',result.data.token);
                     this.$router.back(-1);
-                  }else if(result.data.status == 500){
-                    this.$toast({
-                      message: result.data.msg,
-                      position: 'middle',
-                      duration: 2000
-                    });
                   }
               });
             }

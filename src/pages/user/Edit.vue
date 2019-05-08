@@ -93,9 +93,8 @@
           this.$axios.post('/api/user/uploadAvatar', data).then(
             result =>{
               let res = result.data;
-              if(res.status == 200){
-                this.$store.commit('SET_USERINFO',{head: res.url});
-              }
+              this.$store.commit('SET_USERINFO',{head: res.url});
+
             }
           )
         },
@@ -103,14 +102,7 @@
           this.$axios.post('/api/user/edit', this.userForm).then(
             result =>{
               let res = result.data;
-              if(res.status == 200){
-                this.$store.commit('SET_USERINFO',res.data);
-                this.$toast({
-                  message: res.msg,
-                  position: 'middle',
-                  duration: 2000
-                });
-              }
+              this.$store.commit('SET_USERINFO',res.data);
             }
           )
         }

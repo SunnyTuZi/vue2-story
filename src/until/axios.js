@@ -59,7 +59,7 @@ _axios.interceptors.response.use(function (response) {
       duration: 2000
     });
   }else{
-    if(response.data.status != 200){
+    if(response.data.code != 1){
       Toast({
         message: response.data.msg,
         position: 'middle',

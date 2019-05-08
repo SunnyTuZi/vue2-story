@@ -29,6 +29,9 @@
       <router-link to="./user/dynamic"><mt-cell title="我的动态" is-link></mt-cell></router-link>
       <router-link to="./user/dynamic"><mt-cell title="我的话题关注" is-link></mt-cell></router-link>
     </div>
+    <div class="item-list">
+      <mt-button type="danger" style="width: 100%" @click="longout">退出登录</mt-button>
+    </div>
   </section>
 </template>
 
@@ -36,6 +39,8 @@
   import MtCellDetail from '@/components/cellDetail/cellDetail';
   import {mapState} from 'vuex'
   import {imgBaseUrl} from '../../until/config'
+  import {setStore} from "../../until/localStorage";
+
   export default {
     name: "index",
     data(){
@@ -52,6 +57,13 @@
     },
     components:{
       MtCellDetail
+    },
+    methods:{
+      longout(){
+        setStore('token','');
+        setStore('userInfo','');
+        window.location.reload();
+      }
     }
   }
 </script>

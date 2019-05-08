@@ -17,7 +17,7 @@ import { getStore} from "../until/localStorage";
 Vue.use(Vuex)
 const state = {
   token: getStore('token')||'',
-  userInfo: JSON.parse(getStore('userInfo'))||{},
+  userInfo: getStore('userInfo') ? JSON.parse(getStore('userInfo')):{},
   provinces: null,
   citys: null
 }

@@ -73,6 +73,7 @@
 
       },
       setProvince() {
+        if(!province) return;
         let province = this.towns.split('-')[ 0 ];
         //寻找地址的序号
         for (let i = 0; i < this.provinces.length; i ++) {
