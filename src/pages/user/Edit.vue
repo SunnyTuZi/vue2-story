@@ -55,6 +55,7 @@
     import MtTimep from '../../components/picker/Timep'
     import MtTowns from  '../../components/picker/Town'
     import {imgBaseUrl} from '../../until/config'
+    import {uploadAvatar,editUserInfo} from "../../service/apiList";
 
     export default {
       name: "",
@@ -85,26 +86,25 @@
         selectAddress(){
           this.addressPopup = true;
         },
-        uploadAvatar(){
+        //上传头像
+        async uploadAvatar(){
           let file = document.querySelector('#uploadAvatar');
           let data = new FormData();
           data.append('file',file.files[0]);
           data.append('id',this.userInfo._id);
-          this.$axios.post('/api/user/uploadAvatar', data).then(
-            result =>{
-              let res = result.data;
-              this.$store.commit('SET_USERINFO',{head: res.url});
-
-            }
-          )
+          let result = await uploadAvatar(data);
+          if(result){
+            let res = result.data;
+            this.$store.commit('SET_USERINFO',{head: res.url});
+          }
         },
-        saveInfo(){
-          this.$axios.post('/api/user/edit', this.userForm).then(
-            result =>{
-              let res = result.data;
-              this.$store.commit('SET_USERINFO',res.data);
-            }
-          )
+        //编辑信息
+        async saveInfo(){
+          let result = await editUserInfo(this.userForm);
+          if(result){
+            let res = result.data;
+            this.$store.commit('SET_USERINFO',res.data);
+          }
         }
       }
     }

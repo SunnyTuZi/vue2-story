@@ -65,9 +65,17 @@ _axios.interceptors.response.use(function (response) {
         position: 'middle',
         duration: 2000
       });
+    }else{
+      if(response.data.msg){
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        });
+      }
     }
   }
-  return response;
+  return response.data;
 }, function (error) {
   commonError(error)
 });

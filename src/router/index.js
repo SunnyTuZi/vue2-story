@@ -14,6 +14,8 @@ const userDynamic = () => import('../pages/user/Dynamic');
 const storyList = () => import('../pages/story/List');
 const search = () => import('../pages/search/Search');
 const storyAdd = () => import('../pages/story/Add');
+const bubbleList = () => import('../pages/bubble/List');
+const addGroup = () => import('../pages/bubble/addGroup');
 
 const router = new Router({
   routes: [
@@ -46,6 +48,14 @@ const router = new Router({
     {
       path:'/story/list',
       component: storyList
+    },
+    {
+      path:'/bubble/list',
+      component: bubbleList
+    },
+    {
+      path:'/bubble/addGroup',
+      component: addGroup
     },
     {
       path:'/story/add',

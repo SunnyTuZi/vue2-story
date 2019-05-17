@@ -17,8 +17,10 @@
         <span class="con">话题</span>
       </mt-tab-item>
       <mt-tab-item id="bubble">
-        <span class="iconfont icon-bubble"></span>
-        <span class="con">广场</span>
+        <router-link to="/bubble/list">
+          <span class="iconfont icon-bubble"></span>
+          <span class="con">广场</span>
+        </router-link>
       </mt-tab-item>
       <mt-tab-item id="msg">
         <span class="iconfont icon-msg"></span>

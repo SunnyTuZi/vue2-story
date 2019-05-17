@@ -18,7 +18,7 @@ import MyMtHeader from './components/header/Header'
 import MyMtComment from './components/picker/Comment'
 import CommentList from './components/comment/List'
 import PageTurner from './components/pageTurner/Page'
-
+//socket
 
 Vue.config.productionTip = false
 
@@ -31,9 +31,12 @@ Vue.component('CommentList',CommentList);
 Vue.component('PageTurner',PageTurner);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
+const socket = io.connect('http://localhost:3000/');
+
 //设置全局方法
 Vue.prototype.$axios = axios;
 Vue.prototype.$localStorage = window.localStorage;
+Vue.prototype.$socket = socket;
 
 new Vue({
   el: '#app',

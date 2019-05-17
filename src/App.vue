@@ -16,7 +16,6 @@
     </footer>
   </div>
 </template>
-
 <script>
   import MyFooter from '@/components/footer/footer'
   export default {

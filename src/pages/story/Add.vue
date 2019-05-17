@@ -20,6 +20,8 @@
 
 <script>
   import {mapState} from 'vuex'
+  import {storyAdd} from "../../service/apiList";
+
   export default {
     data() {
       return {
@@ -47,13 +49,9 @@
       focusEditor(){
         this.$refs.editor.focus();
       },
-      addStory(){
+      async addStory(){
         this.storyForm.userId = this.userInfo._id;
-        this.$axios.post('api/story/addStory',this.storyForm).then(
-          (result) =>{
-
-          }
-        )
+        await storyAdd(this.storyForm);
       }
     }
   }
