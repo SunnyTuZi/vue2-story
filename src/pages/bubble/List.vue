@@ -7,39 +7,24 @@
   <section class="box">
     <my-mt-header title="聊天广场" :rightSlot="'addGroup'" @createGroup="createGroup"></my-mt-header>
     <section class="chat-box">
-      <div class="chat-item">
-        <div class="chat-name">来聊个五毛线吧！</div>
-        <div class="chat-con">
-          <div class="staff">
-            <img src="" alt="" class="head">
+      <div class="chat-item" v-for="item in dataArr">
+        <router-link :to='"/bubble/group/"+item._id'>
+          <div class="chat-name">{{item.groupName}}</div>
+          <div class="chat-con">
+            <div class="staff">
+              <img src="" alt="" class="head">
+            </div>
+            <div class="number">{{item.staff}}人正在畅聊</div>
           </div>
-          <div class="number">3人正在畅聊</div>
-        </div>
+        </router-link>
       </div>
-      <div class="chat-item">
-        <div class="chat-name">来聊个五毛线吧！</div>
-        <div class="chat-con">
-          <div class="staff">
-            <img src="" alt="" class="head">
-          </div>
-          <div class="number">3人正在畅聊</div>
-        </div>
-      </div>
-      <div class="chat-item">
-        <div class="chat-name">来聊个五毛线吧！</div>
-        <div class="chat-con">
-          <div class="staff">
-            <img src="" alt="" class="head">
-          </div>
-          <div class="number">3人正在畅聊</div>
-        </div>
-      </div>
-
     </section>
   </section>
 </template>
 
 <script>
+  import {getGroupList} from "../../service/apiList";
+
   export default {
     data() {
       return {
@@ -47,6 +32,7 @@
       }
     },
     mounted() {
+      this.getList();
       // this.getNewMsg();
     },
     methods: {
@@ -59,6 +45,12 @@
       },
       createGroup(){
 
+      },
+      async getList(){
+        let result = await getGroupList();
+        if(result){
+          this.dataArr = result.data;
+        }
       }
     }
   }

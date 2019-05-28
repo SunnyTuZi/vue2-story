@@ -18,6 +18,7 @@ import MyMtHeader from './components/header/Header'
 import MyMtComment from './components/picker/Comment'
 import CommentList from './components/comment/List'
 import PageTurner from './components/pageTurner/Page'
+import SendMsg from  './components/picker/SendMsg'
 //socket
 
 Vue.config.productionTip = false
@@ -29,6 +30,7 @@ Vue.component('MyMtHeader',MyMtHeader);
 Vue.component('MyMtComment',MyMtComment);
 Vue.component('CommentList',CommentList);
 Vue.component('PageTurner',PageTurner);
+Vue.component('SendMsg',SendMsg);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect('http://localhost:3000/');

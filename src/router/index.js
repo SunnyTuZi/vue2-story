@@ -16,6 +16,7 @@ const search = () => import('../pages/search/Search');
 const storyAdd = () => import('../pages/story/Add');
 const bubbleList = () => import('../pages/bubble/List');
 const addGroup = () => import('../pages/bubble/addGroup');
+const bubbleChat = () => import('../pages/bubble/Chat');
 
 const router = new Router({
   routes: [
@@ -64,6 +65,10 @@ const router = new Router({
     {
       path:'./search',
       component: search
+    },
+    {
+      path:'/bubble/group/:id',
+      component: bubbleChat
     }
 
   ]

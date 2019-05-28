@@ -27,7 +27,7 @@
 <script>
     import {mapMutations} from 'vuex'
     import {setStore} from "../../until/localStorage";
-    import {login} from "../../service/apiList";
+    import {login,getCode} from "../../service/apiList";
 
     export default {
         name: "login",
@@ -50,16 +50,16 @@
             async getCode(){
               let result = await getCode();
               if(result){
-                this.imgSrc = result.data.codeImg;
+                this.imgSrc = result.codeImg;
               }
             },
             async login(){
               let result = await login(this.loginForm);
               if(result) {
-                this.SET_TOKEN(result.data.token);
-                this.SET_USERINFO(result.data.data);
-                setStore('userInfo', result.data.data);
-                setStore('token', result.data.token);
+                this.SET_TOKEN(result.token);
+                this.SET_USERINFO(result.data);
+                setStore('userInfo', result.data);
+                setStore('token', result.token);
                 this.$router.back(- 1);
               }
             }

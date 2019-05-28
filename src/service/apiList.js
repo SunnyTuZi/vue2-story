@@ -109,3 +109,25 @@ export const supportStory = (data) => postAjax('api/story/support',data);
  * @returns {Promise<void>}
  */
 export const commentAdd = (data) => postAjax('api/story/commentAdd',data);
+
+/**
+ * 添加分组
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const groupAdd = (data) => postAjax('api/bubble/createGroup',data);
+
+/**
+ * 获取分组
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getGroupList = (data) => getAjax('api/bubble/getGroupList',data);
+
+/**
+ * 添加分组聊天记录
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const AddGroupChatRecord = (data) => getAjax('api/bubble/addChatRecord',data);
+
