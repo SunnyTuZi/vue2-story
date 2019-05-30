@@ -19,6 +19,7 @@ import MyMtComment from './components/picker/Comment'
 import CommentList from './components/comment/List'
 import PageTurner from './components/pageTurner/Page'
 import SendMsg from  './components/picker/SendMsg'
+import ChatBubble from './components/picker/ChatBubble'
 //socket
 
 Vue.config.productionTip = false
@@ -31,10 +32,13 @@ Vue.component('MyMtComment',MyMtComment);
 Vue.component('CommentList',CommentList);
 Vue.component('PageTurner',PageTurner);
 Vue.component('SendMsg',SendMsg);
+Vue.component('ChatBubble',ChatBubble);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect('http://localhost:3000/');
-
+socket.on('news',(data)=>{
+  console.log(data);
+});
 //设置全局方法
 Vue.prototype.$axios = axios;
 Vue.prototype.$localStorage = window.localStorage;

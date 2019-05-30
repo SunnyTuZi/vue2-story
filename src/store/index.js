@@ -19,7 +19,8 @@ const state = {
   token: getStore('token')||'',
   userInfo: getStore('userInfo') ? JSON.parse(getStore('userInfo')):{},
   provinces: null,
-  citys: null
+  citys: null,
+  chat:getStore('chat') ? JSON.parse(getStore('chat')):{}
 }
 export default new Vuex.Store({
   state,

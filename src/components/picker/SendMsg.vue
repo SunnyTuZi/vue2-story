@@ -6,7 +6,7 @@
 <template>
     <section>
       <div class="send-box">
-        <input type="text" class="input-text"/>
+        <input type="text" class="input-text" v-model="msg"/>
         <mt-button type="primary" class="send-btn" size="small" @click="sendMsg()">发送</mt-button>
       </div>
     </section>
@@ -14,11 +14,20 @@
 
 <script>
     export default {
+      data(){
+        return{
+          msg:''
+        }
+      },
+      mounted(){
+        this.msg = this.content;
+      },
       methods:{
         sendMsg(){
-          this.$emit('sendMsg');
+          this.$emit('sendMsg',this.msg);
         }
-      }
+      },
+      props:['content']
     }
 </script>
 

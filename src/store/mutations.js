@@ -10,7 +10,8 @@ import {
   SET_TOKEN,
   SET_USERINFO,
   SET_PROVINCES,
-  SET_CITYS
+  SET_CITYS,
+  SET_CHAT
 } from "./mutation-type";
 import {setStore} from "../until/localStorage";
 
@@ -30,5 +31,10 @@ export default {
   },
   [SET_CITYS](state,data){
     state.citys = data;
+  },
+  [SET_CHAT](state,{groupId,data}) {
+    state.chat[ groupId ] = state.chat[ groupId ] || [];
+    state.chat[ groupId ].push(data);
+    setStore('chat',state.chat);
   }
 }

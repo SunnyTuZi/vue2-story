@@ -129,5 +129,5 @@ export const getGroupList = (data) => getAjax('api/bubble/getGroupList',data);
  * @param data
  * @returns {Promise<void>}
  */
-export const AddGroupChatRecord = (data) => getAjax('api/bubble/addChatRecord',data);
+export const AddGroupChatRecord = (data) => postAjax('api/bubble/addChatRecord',data);
 
