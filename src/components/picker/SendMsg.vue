@@ -27,7 +27,12 @@
           this.$emit('sendMsg',this.msg);
         }
       },
-      props:['content']
+      props:['content'],
+      watch:{
+        content(){
+          this.msg = this.content;
+        }
+      }
     }
 </script>
 
