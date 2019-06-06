@@ -12,6 +12,7 @@
           <li class="item" v-for="item in chatRecord">
             <chat-bubble :chat="item" class="msg" v-if="item.type == 1"></chat-bubble>
             <div class="join-news" v-if="item.type == 2">{{item.username}}加入了群聊</div>
+            <div class="join-news" v-if="item.type == 3">{{item.username}}离开了群聊</div>
           </li>
         </ul>
       </section>
@@ -23,9 +24,10 @@
 </template>
 
 <script>
-  import {imgBaseUrl} from "../../until/config";
+  import {imgBaseUrl,serviceIp} from "../../until/config";
   import {mapMutations, mapState} from 'vuex';
   import {AddGroupChatRecord} from "../../service/apiList";
+  import {socketArr} from "../../until/socketArray";
 
   export default {
     data() {
@@ -37,7 +39,8 @@
         },
         socket: '',
         chatRecord: [],
-        imgBaseUrl: ''
+        imgBaseUrl: '',
+        socketId:''
       }
     },
     computed: {
@@ -48,25 +51,33 @@
       const groupId = this.$route.params.id;
       this.chatForm.userId = this.userInfo._id;
       this.chatForm.groupId = groupId;
-      if(this.chat[groupId]){
-        this.chatRecord = this.chat[groupId]
-      }
-      this.socket = io.connect('http://localhost:3000/' + groupId);
+      this.chat[groupId] = this.chat[groupId]||[];
+      this.chatRecord = this.chat[groupId];
 
+      this.socket = io.connect(serviceIp + groupId);
       var that = this;
       //加入房间
-      this.socket.emit('sendMsg', {type:2,username:this.userInfo.username});
-      //接受信息
+      this.socket.emit('join', {username:this.userInfo.username});
+      //加入房间回调
+      this.socket.on('joinCall',(data)=>{
+        this.socketId = data.id;
+        this.$store.commit('SET_CHAT',{groupId, data});
+      });
+      //接收信息
       this.socket.on('receiveMsg', (data) => {
-        that.SET_CHAT({groupId, data});
-        this.chatRecord = this.chat[groupId]
+        this.$store.commit('SET_CHAT',{groupId, data});
       });
       //连击中断
       this.socket.on('disconnect',(data)=>{
+        if(data != 'io client disconnect'){
           this.$toast({
             message: '群组已到限定时间，将在三秒后解散~',
           });
-          setTimeout(()=>{this.$router.push('/bubble/list')},3000);
+          setTimeout(()=>{
+            this.$router.push('/bubble/list');
+            this.chat[groupId] = [];
+          },3000);
+        }
       });
 
     },
@@ -79,7 +90,7 @@
         this.chatForm.content = data;
         let result = await AddGroupChatRecord(this.chatForm);
         if (result) {
-          var msg = Object.assign(result.data, {head: this.userInfo.head, username: this.userInfo.username,type:1});
+          var msg = Object.assign(result.data, {head: this.userInfo.head, username: this.userInfo.username});
           this.socket.emit('sendMsg', msg);
           this.chatForm.content = '';
         }
@@ -90,6 +101,10 @@
           chatBox.scrollTop = chatBox.scrollHeight;
         })
       }
+    },
+    destroyed(){
+      this.socket.emit('leaveGroup',{id:this.socketId,username:this.userInfo.username});
+      this.socket.close();
     }
   }
 </script>

@@ -61,7 +61,7 @@
         if (! this.provinces) {
           this.$axios.get('api/public/getProvince').then(
             (result) => {
-              let data = result.data.data;
+              let data = result.data;
               this.$store.commit('SET_PROVINCES', data);
               this.townData[ 0 ].values = this.provinces;
               this.setProvince();
@@ -93,7 +93,7 @@
           if (! this.citys) {
             this.$axios.get('api/public/getCity').then(
               (result) => {
-                let data = result.data.data;
+                let data = result.data;
                 this.$store.commit('SET_CITYS', data);
                 this.setCitys(picker,uid);
               }

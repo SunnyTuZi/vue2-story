@@ -94,16 +94,14 @@
           data.append('id',this.userInfo._id);
           let result = await uploadAvatar(data);
           if(result){
-            let res = result.data;
-            this.$store.commit('SET_USERINFO',{head: res.url});
+            this.$store.commit('SET_USERINFO',{head: result.url});
           }
         },
         //编辑信息
         async saveInfo(){
           let result = await editUserInfo(this.userForm);
           if(result){
-            let res = result.data;
-            this.$store.commit('SET_USERINFO',res.data);
+            this.$store.commit('SET_USERINFO',result.data);
           }
         }
       }

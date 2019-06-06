@@ -11,7 +11,8 @@ import {
   SET_USERINFO,
   SET_PROVINCES,
   SET_CITYS,
-  SET_CHAT
+  SET_CHAT,
+  SET_GROUPLIST
 } from "./mutation-type";
 import {setStore} from "../until/localStorage";
 
@@ -36,5 +37,8 @@ export default {
     state.chat[ groupId ] = state.chat[ groupId ] || [];
     state.chat[ groupId ].push(data);
     setStore('chat',state.chat);
+  },
+  [SET_GROUPLIST](state,data){
+    state.groupList = data;
   }
 }

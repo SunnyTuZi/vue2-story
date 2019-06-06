@@ -69,6 +69,7 @@
         border-radius: 5px;
         position: relative;
         background-color: #ddeefb;
+        text-align: left;
       }
     }
   }

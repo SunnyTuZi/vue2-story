@@ -36,13 +36,13 @@ Vue.component('ChatBubble',ChatBubble);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect('http://localhost:3000/');
-socket.on('news',(data)=>{
-  console.log(data);
-});
+
+
 //设置全局方法
 Vue.prototype.$axios = axios;
 Vue.prototype.$localStorage = window.localStorage;
 Vue.prototype.$socket = socket;
+
 
 new Vue({
   el: '#app',

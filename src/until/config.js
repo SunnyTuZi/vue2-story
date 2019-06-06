@@ -13,6 +13,16 @@ if (process.env.NODE_ENV == 'development') {
   imgBaseUrl = '//localhost:3000/img';
 }
 
+let serviceIp = ''
+if (process.env.NODE_ENV == 'development') {
+  serviceIp = 'http://localhost:3000/';
+
+}else if(process.env.NODE_ENV == 'production'){
+  serviceIp = '//localhost:3000/';
+}
+
+
 export {
-  imgBaseUrl
+  imgBaseUrl,
+  serviceIp
 }

@@ -5,18 +5,18 @@
 
 <template>
   <section class="box">
-    <my-mt-header title="聊天广场" :rightSlot="'addGroup'" @createGroup="createGroup"></my-mt-header>
+    <my-mt-header title="聊天广场" :rightSlot="'addGroup'"></my-mt-header>
     <section class="chat-box">
-      <div class="chat-item" v-for="item in dataArr">
-        <router-link :to='"/bubble/group/"+item._id'>
+      <div class="chat-item" v-for="(item,index) in dataArr">
+        <div @click="toChat(index)">
           <div class="chat-name">{{item.groupName}}</div>
           <div class="chat-con">
             <div class="staff">
               <img src="" alt="" class="head">
             </div>
-            <div class="number">{{item.staff}}人正在畅聊</div>
+            <div class="number">{{item.size}}人正在畅聊</div>
           </div>
-        </router-link>
+        </div>
       </div>
     </section>
   </section>
@@ -24,6 +24,7 @@
 
 <script>
   import {getGroupList} from "../../service/apiList";
+  import {mapState,mapMutations} from 'vuex';;
 
   export default {
     data() {
@@ -33,24 +34,44 @@
     },
     mounted() {
       this.getList();
-      // this.getNewMsg();
+    },
+    computed:{
+      ...mapState(['groupList'])
     },
     methods: {
-      getNewMsg() {
-        this.$socket.on('news', (data) => {
-          for (let item of data) {
-            this.dataArr.push(item);
-          }
-        });
-      },
-      createGroup(){
-
-      },
+      ...mapMutations(['SET_GROUPLIST']),
       async getList(){
         let result = await getGroupList();
         if(result){
-          this.dataArr = result.data;
+          this.dataArr = this.dataArr.concat(result.data);
+          this.$store.commit('SET_GROUPLIST',this.dataArr);
         }
+        this.$socket.emit('onHandlerGourp');
+        this.$socket.on('changeGroupList',(data) =>{
+          for (let i = 0; i < this.dataArr.length; i ++) {
+            var groupId = data.groupId;
+            if(groupId == this.dataArr[i]._id){
+              this.dataArr[i].size += data.num;
+              this.$set(this.dataArr[i],'size',this.dataArr[i].size);
+            }
+          }
+        });
+        this.$router.afterEach((to,from,next)=>{
+          this.$socket.emit('leaveRoom',{room:'onHandlerGourp'});
+        });
+      },
+      toChat(index){
+        let item = this.dataArr[index];
+        if(item.staff > item.size){
+          this.$router.push('/bubble/group/'+item._id);
+        }else{
+          this.$toast({
+            message:'房间人数已满~',
+            position: 'middle',
+            duration: 2000
+          })
+        }
+
       }
     }
   }
