@@ -17,7 +17,7 @@
         <span class="con">话题</span>
       </mt-tab-item>
       <mt-tab-item id="bubble">
-        <router-link to="/bubble/list">
+        <router-link to="/index/bubble/list">
           <span class="iconfont icon-bubble"></span>
           <span class="con">广场</span>
         </router-link>
@@ -27,7 +27,7 @@
         <span class="con">消息</span>
       </mt-tab-item>
       <mt-tab-item id="me">
-        <router-link to="/user">
+        <router-link to="/index/user">
           <span class="iconfont icon-me"></span>
           <span class="con">我的</span>
         </router-link>

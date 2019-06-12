@@ -12,7 +12,7 @@
         <div class="content">
           <div class="author">
             <div class="cell-list head">
-              <router-link to="">
+              <router-link :to="'/user/briefInfo/'+item.userId._id">
                 <img class="img-head" :src="imgBaseUrl + item.userId.head" alt=""/>
               </router-link>
             </div>
@@ -65,7 +65,7 @@
         </div>
       </article>
     </section>
-  </section>
+  </section class="box">
 </template>
 
 <script>

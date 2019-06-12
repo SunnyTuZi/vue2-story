@@ -5,7 +5,7 @@
 
 <template>
   <section class="box">
-    <my-mt-header title="聊天"></my-mt-header>
+    <my-mt-header :title="groupName"></my-mt-header>
     <section class="chat-box">
       <section class="chat-list" id="chatList">
         <ul>
@@ -27,15 +27,17 @@
   import {imgBaseUrl,serviceIp} from "../../until/config";
   import {mapMutations, mapState} from 'vuex';
   import {AddGroupChatRecord} from "../../service/apiList";
-  import {socketArr} from "../../until/socketArray";
 
   export default {
     data() {
       return {
+        groupName:'',
         chatForm: {
           userId: '',
           groupId: '',
-          content: ''
+          content: '',
+          toUserId: '',
+          head:''
         },
         socket: '',
         chatRecord: [],
@@ -47,15 +49,15 @@
       ...mapState([ 'userInfo', 'chat' ])
     },
     mounted() {
-      this.imgBaseUrl = imgBaseUrl;
       const groupId = this.$route.params.id;
+      this.imgBaseUrl = imgBaseUrl;
+      this.groupName = this.$route.params.name;
       this.chatForm.userId = this.userInfo._id;
       this.chatForm.groupId = groupId;
       this.chat[groupId] = this.chat[groupId]||[];
       this.chatRecord = this.chat[groupId];
 
       this.socket = io.connect(serviceIp + groupId);
-      var that = this;
       //加入房间
       this.socket.emit('join', {username:this.userInfo.username});
       //加入房间回调
@@ -88,6 +90,7 @@
       ...mapMutations([ 'SET_CHAT' ]),
       async sendMsg(data) {
         this.chatForm.content = data;
+        this.chatForm.head = this.userInfo.head;
         let result = await AddGroupChatRecord(this.chatForm);
         if (result) {
           var msg = Object.assign(result.data, {head: this.userInfo.head, username: this.userInfo.username});

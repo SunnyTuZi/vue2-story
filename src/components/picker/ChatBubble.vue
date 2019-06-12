@@ -4,7 +4,7 @@
 -->
 
 <template>
-  <section class="box">
+  <section>
     <div class="bubble-box left" v-if="chat.userId != userInfo._id">
       <img :src="imgBaseUrl+chat.head" alt="" class="img-head"/>
       <div class="con">

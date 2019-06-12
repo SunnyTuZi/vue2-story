@@ -62,6 +62,20 @@ export const uploadAvatar = (data) => postAjax('api/user/uploadAvatar',data);
 export const editUserInfo = (data) => postAjax('api/user/edit',data);
 
 /**
+ * 获取用户信息
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getUserInfo = (data) => getAjax('api/user/getUserInfo',data);
+
+/**
+ * 关注用户
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const followUser = (data) => postAjax('api/user/follow',data);
+
+/**
  * 获取故事列表
  * @param data
  * @returns {Promise<*>}
@@ -131,3 +145,16 @@ export const getGroupList = (data) => getAjax('api/bubble/getGroupList',data);
  */
 export const AddGroupChatRecord = (data) => postAjax('api/bubble/addChatRecord',data);
 
+/**
+ * 添加私聊聊天记录
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const addChatRecord = (data) => postAjax('api/chat/addRecord',data);
+
+/**
+ * 更改信息状态
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const updateRecord = (data) => postAjax('api/chat/updateRecord',data);

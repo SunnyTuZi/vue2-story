@@ -6,16 +6,7 @@
 <template>
   <section class="user-box">
     <div class="user-head item-list">
-      <p class="img-box"><img :src="userInfo.head ? imgBaseUrl + userInfo.head:''" alt="" class="head-img"/></p>
-      <div class="smiple-box" v-if="token">
-        <p class="nickname">{{userInfo.username}}</p>
-        <p class="synopsis">{{userInfo.autograph}}</p>
-        <p class="follow">
-          <a>10人关注</a>
-          <span class="trim">|</span>
-          <a>10个粉丝</a>
-        </p>
-      </div>
+      <user-index :userInfo="userInfo" :token="token"></user-index>
       <router-link to="/user/login" class="login-btn" v-if="!token">登录/注册</router-link>
     </div>
     <div class="user-info item-list">
@@ -37,20 +28,19 @@
 
 <script>
   import MtCellDetail from '@/components/cellDetail/cellDetail';
-  import {mapState} from 'vuex'
-  import {imgBaseUrl} from '../../until/config'
+  import {mapState,mapMutations} from 'vuex';
+  import {imgBaseUrl} from '../../until/config';
   import {setStore} from "../../until/localStorage";
+  import {getUserInfo} from "../../service/apiList";
 
   export default {
     name: "index",
     data(){
       return{
         tokenStatus: false,
-        imgBaseUrl: imgBaseUrl
+        imgBaseUrl: imgBaseUrl,
+        follows:''
       }
-    },
-    mounted(){
-
     },
     computed:{
       ...mapState(['token','userInfo'])
@@ -58,11 +48,21 @@
     components:{
       MtCellDetail
     },
+    mounted(){
+      this.getFollow();
+    },
     methods:{
+      ...mapMutations(['SET_USERINFO']),
       longout(){
         setStore('token','');
         setStore('userInfo','');
         window.location.reload();
+      },
+      async getFollow(){
+        let res = await getUserInfo({userId:this.userInfo._id});
+        if(res){
+          this.$store.commit('SET_USERINFO',res.data);
+        }
       }
     }
   }
@@ -71,8 +71,10 @@
 <style scoped lang="less">
   @import "../../public/style/mixin";
   .user-box {
+    margin-top: -40px;
     width: 100%;
-    margin-top: -35px;
+    height: 100%;
+    overflow-y: auto;
     .user-head {
       .flex;
       flex-direction: column;

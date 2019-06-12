@@ -1,6 +1,10 @@
+<!--
+ * Create by Zwl on 2019/6/12
+ * @Description: 容器
+-->
 
 <template>
-  <div id="app" class="app-box">
+  <section class="middle-box">
     <section class="continer">
       <transition name="router-fade" mode="out-in">
         <keep-alive>
@@ -11,25 +15,40 @@
         <router-view v-if="!$route.meta.keepAlive"></router-view>
       </transition>
     </section>
-  </div>
+    <section class="footer">
+      <my-mt-footer></my-mt-footer>
+    </section>
+
+  </section>
 </template>
+
 <script>
   export default {
-    name: 'App'
-}
+    name: "Continer"
+  }
 </script>
 
-<style lang="less">
-  @import "public/style/common";
-  .app-box{
+<style scoped lang="less">
+  .middle-box {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    .continer{
-      width: 100%;
-      height: 100%;
+    .continer {
+      display: flex;
+      overflow-y: auto;
+      flex-grow: 1;
+      /*padding-top: 40px;*/
+    }
+    .footer {
+      display: flex;
+      flex: 0 0 auto;
+      height: 60px;
+      border-top: 0.013333rem solid #dddddd;
     }
   }
+
   .router-fade-enter-active, .router-fade-leave-active {
     transition: opacity .3s;
   }
@@ -37,5 +56,4 @@
   .router-fade-enter, .router-fade-leave-active {
     opacity: 0;
   }
-
 </style>

@@ -59,7 +59,7 @@
         }
         let result = await groupAdd(this.groupForm);
         if(result){
-          this.$router.push('/bubble/list');
+          this.$router.push('/index/bubble/list');
         }
       }
     }

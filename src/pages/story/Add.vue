@@ -11,7 +11,7 @@
       <div class="cell editor-box">
         <p class="placeholder-text" v-show="placeholder_text" @click="focusEditor">请输入至少20个字的内容</p>
         <vue-html5-editor class="content-box" :height="300" :show-module-name="false"
-                          @change="updateData">
+                          @change="updateData" :content="storyForm.storyContent">
         </vue-html5-editor>
       </div>
     </section>
@@ -51,7 +51,10 @@
       },
       async addStory(){
         this.storyForm.userId = this.userInfo._id;
-        await storyAdd(this.storyForm);
+        let res = await storyAdd(this.storyForm);
+        if(res){
+
+        }
       }
     }
   }

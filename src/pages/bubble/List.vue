@@ -63,7 +63,7 @@
       toChat(index){
         let item = this.dataArr[index];
         if(item.staff > item.size){
-          this.$router.push('/bubble/group/'+item._id);
+          this.$router.push('/bubble/group/'+item._id+'/'+item.groupName);
         }else{
           this.$toast({
             message:'房间人数已满~',

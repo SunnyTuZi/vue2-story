@@ -6,7 +6,7 @@ import { Toast } from 'mint-ui';
 
 Vue.use(Router);
 
-
+const continer = () => import('../pages/Continer');
 const userIndex = () => import('../pages/user/index');
 const userEdit = () => import('../pages/user/Edit');
 const userLogin = () => import('../pages/user/Login');
@@ -17,17 +17,38 @@ const storyAdd = () => import('../pages/story/Add');
 const bubbleList = () => import('../pages/bubble/List');
 const addGroup = () => import('../pages/bubble/addGroup');
 const bubbleChat = () => import('../pages/bubble/Chat');
+const userBriefInfo = () => import('../pages/user/BriefInfo');
+const userChat = () => import('../pages/user/Chat');
 
 const router = new Router({
   routes: [
     {
       path: '/',
-      component: storyList
+      redirect: '/index/story/list'
     },
     {
-      path: '/user',
-      component: userIndex
+      path: '/index',
+      redirect: '/index/story/list'
     },
+    {
+      path:'/index',
+      component:continer,
+      children:[
+        {
+          path:'story/list',
+          component:storyList
+        },
+        {
+          path:'bubble/list',
+          component: bubbleList
+        },
+        {
+          path: 'user',
+          component: userIndex
+        },
+      ]
+    },
+
     {
       path:'/user/edit',
       component: userEdit,
@@ -47,28 +68,29 @@ const router = new Router({
       }
     },
     {
-      path:'/story/list',
-      component: storyList
-    },
-    {
-      path:'/bubble/list',
-      component: bubbleList
-    },
-    {
       path:'/bubble/addGroup',
       component: addGroup
+    },
+
+    {
+      path:'./search',
+      component: search
+    },
+    {
+      path:'/bubble/group/:id/:name',
+      component: bubbleChat
     },
     {
       path:'/story/add',
       component: storyAdd
     },
     {
-      path:'./search',
-      component: search
+      path:'/user/briefInfo/:id',
+      component: userBriefInfo
     },
     {
-      path:'/bubble/group/:id',
-      component: bubbleChat
+      path:'/user/chat/:id/:name',
+      component: userChat
     }
 
   ]
