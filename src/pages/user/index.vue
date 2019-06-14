@@ -10,7 +10,7 @@
       <router-link to="/user/login" class="login-btn" v-if="!token">登录/注册</router-link>
     </div>
     <div class="user-info item-list">
-      <router-link to="./user/edit"><mt-cell title="基本信息" is-link></mt-cell></router-link>
+      <router-link to="/user/edit"><mt-cell title="基本信息" is-link></mt-cell></router-link>
       <mt-cell-detail label="性别" :value="userInfo.sex == 1 ? '男' : '女'"></mt-cell-detail>
       <mt-cell-detail label="出生年月" :value="userInfo.dateOfBirth" ></mt-cell-detail>
       <mt-cell-detail label="邮箱" :value="userInfo.email"></mt-cell-detail>

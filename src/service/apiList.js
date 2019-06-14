@@ -158,3 +158,51 @@ export const addChatRecord = (data) => postAjax('api/chat/addRecord',data);
  * @returns {Promise<void>}
  */
 export const updateRecord = (data) => postAjax('api/chat/updateRecord',data);
+
+/**
+ * 获取未读信息条数
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getUnReadMsgNum = (data) => getAjax('api/chat/getUnReadMsgNum',data);
+
+/**
+ * 获取信息列表
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getUnReadMsgList = (data) => getAjax('api/chat/getUnReadMsgList',data);
+
+/**
+ * 根据用户获取未读信息
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getUnReadMsgByUser = (data) => postAjax('api/chat/getUnReadMsgByUser',data);
+
+/**
+ * 创建话题
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const addTopic = (data) => postAjax('api/topic/addTopic',data);
+
+/**
+ * 获取话题列表
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getTopicList = (data) => getAjax('api/topic/getTopicList',data);
+
+/**
+ * 获取话题详情
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getTopicDeatil = (data) => getAjax('api/topic/getTopicDeatil',data);
+
+
+
+
+
+

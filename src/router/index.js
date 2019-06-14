@@ -19,6 +19,9 @@ const addGroup = () => import('../pages/bubble/addGroup');
 const bubbleChat = () => import('../pages/bubble/Chat');
 const userBriefInfo = () => import('../pages/user/BriefInfo');
 const userChat = () => import('../pages/user/Chat');
+const msgList = () => import('../pages/msg/List');
+const topicList = () => import('../pages/topic/List');
+const topicDetail = () => import('../pages/topic/Detail');
 
 const router = new Router({
   routes: [
@@ -46,6 +49,14 @@ const router = new Router({
           path: 'user',
           component: userIndex
         },
+        {
+          path:'msg/list',
+          component:msgList
+        },
+        {
+          path:'topic/list',
+          component:topicList
+        }
       ]
     },
 
@@ -91,8 +102,11 @@ const router = new Router({
     {
       path:'/user/chat/:id/:name',
       component: userChat
+    },
+    {
+      path:'/topic/detail/:id',
+      component: topicDetail
     }
-
   ]
 });
 

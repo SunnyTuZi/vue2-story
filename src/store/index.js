@@ -21,7 +21,8 @@ const state = {
   provinces: null,
   citys: null,
   chat:getStore('chat') ? JSON.parse(getStore('chat')):{},
-  groupList:null
+  groupList:null,
+  topicList:null
 }
 export default new Vuex.Store({
   state,

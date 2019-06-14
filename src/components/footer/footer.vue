@@ -13,8 +13,10 @@
         </router-link>
       </mt-tab-item>
       <mt-tab-item id="topic">
-        <span class="iconfont icon-topic"></span>
-        <span class="con">话题</span>
+        <router-link to="/index/topic/list">
+          <span class="iconfont icon-topic"></span>
+          <span class="con">话题</span>
+        </router-link>
       </mt-tab-item>
       <mt-tab-item id="bubble">
         <router-link to="/index/bubble/list">
@@ -22,9 +24,12 @@
           <span class="con">广场</span>
         </router-link>
       </mt-tab-item>
-      <mt-tab-item id="msg">
-        <span class="iconfont icon-msg"></span>
-        <span class="con">消息</span>
+      <mt-tab-item id="msg" class="msg">
+        <router-link to="/index/msg/list">
+          <span class="iconfont icon-msg"></span>
+          <span class="con">消息</span>
+          <span class="num" v-if="unNum>0">{{unNum}}</span>
+        </router-link>
       </mt-tab-item>
       <mt-tab-item id="me">
         <router-link to="/index/user">
@@ -37,12 +42,36 @@
 </template>
 
 <script>
+  import {getUnReadMsgNum} from "../../service/apiList";
+  import {mapState} from 'vuex';
 
   export default {
-    name: "MyFooter",
     data() {
       return {
-        selected: 'index'
+        selected: 'index',
+        unNum:0
+      }
+    },
+    mounted(){
+      this.getUnReadMsgNum();
+      if(this.token){
+        //监听用户登录后接受私聊信息
+        this.$socket.emit('login',this.userInfo);
+        this.$socket.on('privateChatMsg',()=>{
+          this.getUnReadMsgNum();
+        });
+      }
+
+    },
+    computed:{
+      ...mapState(['userInfo','token'])
+    },
+    methods:{
+      async getUnReadMsgNum(){
+        let res = await getUnReadMsgNum({_id:this.userInfo._id});
+        if(res){
+          this.unNum = res.data;
+        }
       }
     }
 
@@ -52,6 +81,15 @@
 <style scoped lang="less">
   @import "../../public/style/mixin";
   .footer-box {
+    .msg{
+      position: relative;
+      .num{
+        .msg-tips(16px);
+        position: absolute;
+        top: 8px;
+        left: 40px;
+      }
+    }
     .iconfont {
       display: block;
       font-size: 24px;

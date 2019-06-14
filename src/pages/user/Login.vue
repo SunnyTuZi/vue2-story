@@ -60,6 +60,9 @@
                 this.SET_USERINFO(result.data);
                 setStore('userInfo', result.data);
                 setStore('token', result.token);
+                // this.$socket.on('privateChatMsg',(data)=>{
+                //   ;
+                // });
                 this.$router.back(- 1);
               }
             }

@@ -41,7 +41,6 @@ Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect('http://localhost:3000/');
 
-
 //设置全局方法
 Vue.prototype.$axios = axios;
 Vue.prototype.$localStorage = window.localStorage;

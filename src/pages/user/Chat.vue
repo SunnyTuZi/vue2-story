@@ -24,7 +24,7 @@
 <script>
   import {imgBaseUrl} from "../../until/config";
   import {mapMutations, mapState} from 'vuex';
-  import {addChatRecord,updateRecord} from "../../service/apiList";
+  import {addChatRecord,updateRecord,getUnReadMsgByUser} from "../../service/apiList";
 
   export default {
     data() {
@@ -57,8 +57,8 @@
       this.$socket.on('privateChatMsg',(data)=>{
         let groupId = this.groupId;
         this.$store.commit('SET_CHAT',{groupId, data});
-        this.updateRecordStatus();
       });
+      this.getUnReadMsgByUser();
 
     },
     updated(){
@@ -66,6 +66,7 @@
     },
     methods: {
       ...mapMutations([ 'SET_CHAT' ]),
+      //发送信息
       async sendMsg(content) {
         this.chatForm.content = content;
         let data = {
@@ -82,18 +83,41 @@
           this.chatForm.content = '';
         }
       },
+      //信息滚到最底部
       chatBoxToBottom: function () {
         this.$nextTick(function(){
           var chatBox = document.getElementById('chatList');
           chatBox.scrollTop = chatBox.scrollHeight;
         })
       },
+      //将与当前用户的聊天记录标记为已读
       async updateRecordStatus(){
-        let res = await updateRecord({toUserId:this.userInfo._id,userId:this.toUserId});
+        await updateRecord({toUserId:this.userInfo._id,userId:this.toUserId});
+      },
+      //获取未读的聊天信息
+      async getUnReadMsgByUser(){
+        let res = await getUnReadMsgByUser({userId:this.toUserId,toUserId:this.userInfo._id});
         if(res){
-
+          res.data.forEach((item,i)=>{
+            let groupId = this.groupId;
+            let data = {
+              username:item.userId.username,
+              userId: item.userId._id,
+              content:item.content,
+              toUserId:item.toUserId,
+              head:item.userId.head
+            };
+            this.$store.commit('SET_CHAT',{groupId, data});
+          });
+          this.updateRecordStatus();
         }
       }
+    },
+    //离开前，将信息设为已读
+    destroyed(){
+      this.updateRecordStatus();
+      //清除本页面的监听事件
+      this.$socket.removeAllListeners();
     }
   }
 </script>
