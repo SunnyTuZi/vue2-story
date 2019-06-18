@@ -61,10 +61,10 @@
           this.getUnReadMsgNum();
         });
       }
-
+      this.selected = this.menu;
     },
     computed:{
-      ...mapState(['userInfo','token'])
+      ...mapState(['userInfo','token','menu'])
     },
     methods:{
       async getUnReadMsgNum(){

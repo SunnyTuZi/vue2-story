@@ -201,6 +201,13 @@ export const getTopicList = (data) => getAjax('api/topic/getTopicList',data);
  */
 export const getTopicDeatil = (data) => getAjax('api/topic/getTopicDeatil',data);
 
+/**
+ * 关注话题
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const followTopic = (data) => postAjax('api/topic/followTopic',data);
+
 
 
 

@@ -29,10 +29,15 @@
         storyForm:{
           userId: '',
           storyName: '',
-          storyContent: ''
+          storyContent: '',
+          topicId:''
         },
+        topicId:'',
         placeholder_text: true,
       }
+    },
+    mounted(){
+      this.storyForm.topicId = this.$route.params.id;
     },
     computed:{
       ...mapState(['userInfo'])
@@ -53,7 +58,7 @@
         this.storyForm.userId = this.userInfo._id;
         let res = await storyAdd(this.storyForm);
         if(res){
-
+          this.$router.go(-1);
         }
       }
     }

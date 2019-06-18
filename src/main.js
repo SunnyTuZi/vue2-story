@@ -22,6 +22,7 @@ import PageTurner from './components/pageTurner/Page'
 import SendMsg from  './components/picker/SendMsg'
 import ChatBubble from './components/picker/ChatBubble'
 import UserIndex from  './components/user/Index'
+import StoryItem from './components/story/Item'
 //socket
 
 Vue.config.productionTip = false
@@ -37,6 +38,7 @@ Vue.component('PageTurner',PageTurner);
 Vue.component('SendMsg',SendMsg);
 Vue.component('ChatBubble',ChatBubble);
 Vue.component('UserIndex',UserIndex);
+Vue.component('StoryItem',StoryItem);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect('http://localhost:3000/');

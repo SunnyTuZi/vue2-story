@@ -18,6 +18,7 @@ Vue.use(Vuex)
 const state = {
   token: getStore('token')||'',
   userInfo: getStore('userInfo') ? JSON.parse(getStore('userInfo')):{},
+  menu:null,
   provinces: null,
   citys: null,
   chat:getStore('chat') ? JSON.parse(getStore('chat')):{},

@@ -43,16 +43,17 @@
       }
     },
     computed:{
-      ...mapState(['token','userInfo'])
+      ...mapState(['token','userInfo','menu'])
     },
     components:{
       MtCellDetail
     },
     mounted(){
       this.getFollow();
+      this.$store.commit('SET_MENU','me');
     },
     methods:{
-      ...mapMutations(['SET_USERINFO']),
+      ...mapMutations(['SET_USERINFO','SET_MENU']),
       longout(){
         setStore('token','');
         setStore('userInfo','');

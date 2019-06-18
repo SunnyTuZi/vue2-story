@@ -24,7 +24,7 @@
 
 <script>
   import {getGroupList} from "../../service/apiList";
-  import {mapState,mapMutations} from 'vuex';;
+  import {mapState,mapMutations} from 'vuex';
 
   export default {
     data() {
@@ -34,12 +34,13 @@
     },
     mounted() {
       this.getList();
+      this.$store.commit('SET_MENU','bubble');
     },
     computed:{
       ...mapState(['groupList'])
     },
     methods: {
-      ...mapMutations(['SET_GROUPLIST']),
+      ...mapMutations(['SET_GROUPLIST','SET_MENU']),
       async getList(){
         let result = await getGroupList();
         if(result){

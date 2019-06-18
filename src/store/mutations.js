@@ -9,6 +9,7 @@
 import {
   SET_TOKEN,
   SET_USERINFO,
+  SET_MENU,
   SET_PROVINCES,
   SET_CITYS,
   SET_CHAT,
@@ -26,6 +27,9 @@ export default {
     //合并对象，防止编辑的时候数据丢失
     state.userInfo = Object.assign({},state.userInfo,info);
     setStore('userInfo',state.userInfo);
+  },
+  [SET_MENU](state,menu){
+    state.menu = menu;
   },
   [SET_PROVINCES](state,data){
     state.provinces = data;

@@ -7,16 +7,16 @@
   <section class="box">
     <my-mt-header title="话题列表" leftSlot=""></my-mt-header>
     <ul>
-      <li v-for="item in topicList" @click="toTopic(item)">
+      <li v-for="item in topicList" @click="toTopic(item._id)">
         <div class="top-head">
-          <img :src="imgBaseUrl+item.topicImg" alt="">
+          <img :src="imgBaseUrl+item._id.topicImg" alt="">
         </div>
         <div class="topic-name">
-          <p class="name">{{item.topicName}}</p>
-          <p class="info">简介：{{item.topicInfo}}</p>
+          <p class="name">{{item._id.topicName}}</p>
+          <p class="info">简介：{{item._id.topicInfo}}</p>
         </div>
         <div class="topic-num">
-          关注人数0
+          关注人数{{item._id.size}}人
         </div>
       </li>
     </ul>
@@ -26,6 +26,7 @@
 <script>
   import {imgBaseUrl} from "../../until/config";
   import {getTopicList} from "../../service/apiList";
+  import {mapMutations} from 'vuex';
 
   export default {
     data(){
@@ -37,8 +38,10 @@
     mounted(){
       this.imgBaseUrl = imgBaseUrl;
       this.getTopicList();
+      this.$store.commit('SET_MENU','topic');
     },
     methods:{
+      ...mapMutations(['SET_MENU']),
       async getTopicList(){
         let res = await getTopicList();
         if(res){

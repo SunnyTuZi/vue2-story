@@ -92,7 +92,7 @@ const router = new Router({
       component: bubbleChat
     },
     {
-      path:'/story/add',
+      path:'/story/add/:id',
       component: storyAdd
     },
     {

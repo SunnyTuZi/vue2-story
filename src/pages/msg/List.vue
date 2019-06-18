@@ -26,7 +26,7 @@
 <script>
   import {imgBaseUrl} from "../../until/config";
   import {getUnReadMsgList} from "../../service/apiList";
-  import {mapState} from 'vuex';
+  import {mapState,mapMutations} from 'vuex';
   export default {
     data(){
       return{
@@ -44,11 +44,13 @@
           this.getUnReadMsgList();
         });
       }
+      this.$store.commit('SET_MENU','msg');
     },
     computed:{
       ...mapState(['userInfo','token'])
     },
     methods:{
+      ...mapMutations(['SET_MENU']),
       //获取聊天列表
       async getUnReadMsgList(){
         let res = await getUnReadMsgList({_id:this.userInfo._id});

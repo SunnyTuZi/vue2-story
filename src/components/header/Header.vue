@@ -12,7 +12,7 @@
       </div>
       <div slot="right">
         <mt-button  v-if="rightSlot == 'user'" class="iconfont icon-me" @click="$router.push({path:'/user'})" ></mt-button>
-        <mt-button  v-if="rightSlot == 'send'" class="iconfont icon-write" @click="$router.push({path:'/story/add'})" ></mt-button>
+        <mt-button  v-if="rightSlot == 'send'" class="iconfont icon-write" @click="$router.push({path:'/story/add/0'})" ></mt-button>
         <mt-button  v-if="rightSlot == 'addStory'" @click="sendStory" class="btn-text">发表</mt-button>
         <mt-button  v-if="rightSlot == 'addGroup'"@click="$router.push({path:'/bubble/addGroup'})" class="iconfont icon-add"></mt-button>
       </div>
