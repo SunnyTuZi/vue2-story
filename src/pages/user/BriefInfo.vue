@@ -12,12 +12,21 @@
         <a class="send-btn" @click="toChatByUser">私信TA</a>
       </div>
     </user-index>
+    <div class="item-list">
+      <mt-cell title="基本信息" is-link class="user-info"></mt-cell>
+      <mt-cell-detail label="性别" :value="userInfo.sex == 1 ? '男' : '女'"></mt-cell-detail>
+      <mt-cell-detail label="出生年月" :value="userInfo.dateOfBirth" ></mt-cell-detail>
+      <mt-cell-detail label="邮箱" :value="userInfo.email"></mt-cell-detail>
+      <mt-cell-detail label="所在地" :value="userInfo.address"></mt-cell-detail>
+      <mt-cell-detail label="创建时间" value="2019-02-25" class="border-bottom"></mt-cell-detail>
+    </div>
   </section>
 </template>
 
 <script>
   import {getUserInfo,followUser} from "../../service/apiList";
   import {mapState} from 'vuex';
+  import MtCellDetail from '@/components/cellDetail/cellDetail';
 
   export default {
     data() {
@@ -32,6 +41,9 @@
     },
     computed:{
       ...mapState(['userInfo'])
+    },
+    components:{
+      MtCellDetail
     },
     methods: {
       async getUserInfo() {
@@ -69,6 +81,14 @@
       .send-btn {
         .com-btn(#fff,@theme-color);
         margin-left: 30px;
+      }
+    }
+    .item-list{
+      background: #fff;
+      margin-top: 20px;
+      .bottom-shadow;
+      .user-info{
+        border-bottom: 1px solid #ddd;
       }
     }
   }

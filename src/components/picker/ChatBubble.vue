@@ -6,7 +6,7 @@
 <template>
   <section>
     <div class="bubble-box left" v-if="chat.userId != userInfo._id">
-      <img :src="imgBaseUrl+chat.head" alt="" class="img-head"/>
+      <img :src="imgBaseUrl+chat.head" alt="" class="img-head" @click="toUserBrife(chat.userId)"/>
       <div class="con">
         <p class="name">{{chat.username}}</p>
         <p class="msg">{{chat.content}}</p>
@@ -44,6 +44,11 @@
     },
     mounted(){
       this.imgBaseUrl = imgBaseUrl;
+    },
+    methods:{
+      toUserBrife(uid){
+        this.$router.push('/user/briefInfo/'+uid);
+      }
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <!--
  * Create by Zwl on 2019/5/28
- * @Description:
+ * @Description: 发送信息组件
 -->
 
 <template>

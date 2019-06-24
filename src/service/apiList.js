@@ -76,6 +76,21 @@ export const getUserInfo = (data) => getAjax('api/user/getUserInfo',data);
 export const followUser = (data) => postAjax('api/user/follow',data);
 
 /**
+ * 获取关注的用户
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getFollowList = (data) => getAjax('api/user/getFollowList',data);
+/**
+ *
+ * 获取被关注的用户
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getByFollowList = (data) => getAjax('api/user/getByFollowList',data);
+
+
+/**
  * 获取故事列表
  * @param data
  * @returns {Promise<*>}
@@ -207,6 +222,21 @@ export const getTopicDeatil = (data) => getAjax('api/topic/getTopicDeatil',data)
  * @returns {Promise<void>}
  */
 export const followTopic = (data) => postAjax('api/topic/followTopic',data);
+
+/**
+ * 我的收藏
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getLikeByUser = (data) => getAjax('api/user/getLikeByUser',data);
+
+
+/**
+ * 我的评论
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getCommentByUser = (data) => getAjax('api/user/getCommentByUser',data);
 
 
 

@@ -39,7 +39,13 @@
       data(){
         return{
           topicId:'',
-          topics:{},
+          topics:{
+            topicName:'',
+            topicImg:'',
+            topicInfo:'',
+            followsize:''
+
+          },
           imgBaseUrl:'',
           storyList:[]
         }

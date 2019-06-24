@@ -11,6 +11,8 @@ const userIndex = () => import('../pages/user/index');
 const userEdit = () => import('../pages/user/Edit');
 const userLogin = () => import('../pages/user/Login');
 const userDynamic = () => import('../pages/user/Dynamic');
+const followList = () => import('../pages/user/FollowList');
+const byFollowList = () => import('../pages/user/ByFollowList');
 const storyList = () => import('../pages/story/List');
 const search = () => import('../pages/search/Search');
 const storyAdd = () => import('../pages/story/Add');
@@ -22,6 +24,8 @@ const userChat = () => import('../pages/user/Chat');
 const msgList = () => import('../pages/msg/List');
 const topicList = () => import('../pages/topic/List');
 const topicDetail = () => import('../pages/topic/Detail');
+const myLike = () => import('../pages/user/MyLike');
+const myTopic = () => import('../pages/user/MyTopic');
 
 const router = new Router({
   routes: [
@@ -106,6 +110,22 @@ const router = new Router({
     {
       path:'/topic/detail/:id',
       component: topicDetail
+    },
+    {
+      path:'/user/followList/:id',
+      component: followList
+    },
+    {
+      path:'/user/byFollowList/:id',
+      component: byFollowList
+    },
+    {
+      path:'/user/myLike',
+      component: myLike
+    },
+    {
+      path:'/user/myTopic',
+      component: myTopic
     }
   ]
 });

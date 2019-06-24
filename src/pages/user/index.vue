@@ -11,14 +11,14 @@
     </div>
     <div class="user-info item-list">
       <router-link to="/user/edit"><mt-cell title="基本信息" is-link></mt-cell></router-link>
-      <mt-cell-detail label="性别" :value="userInfo.sex == 1 ? '男' : '女'"></mt-cell-detail>
-      <mt-cell-detail label="出生年月" :value="userInfo.dateOfBirth" ></mt-cell-detail>
-      <mt-cell-detail label="邮箱" :value="userInfo.email"></mt-cell-detail>
-      <mt-cell-detail label="所在地" :value="userInfo.address"></mt-cell-detail>
-      <mt-cell-detail label="创建时间" value="2019-02-25" class="border-bottom"></mt-cell-detail>
-      <router-link to="./user/dynamic"><mt-cell title="我的收藏" is-link></mt-cell></router-link>
-      <router-link to="./user/dynamic"><mt-cell title="我的动态" is-link></mt-cell></router-link>
-      <router-link to="./user/dynamic"><mt-cell title="我的话题关注" is-link></mt-cell></router-link>
+      <!--<mt-cell-detail label="性别" :value="userInfo.sex == 1 ? '男' : '女'"></mt-cell-detail>-->
+      <!--<mt-cell-detail label="出生年月" :value="userInfo.dateOfBirth" ></mt-cell-detail>-->
+      <!--<mt-cell-detail label="邮箱" :value="userInfo.email"></mt-cell-detail>-->
+      <!--<mt-cell-detail label="所在地" :value="userInfo.address"></mt-cell-detail>-->
+      <!--<mt-cell-detail label="创建时间" value="2019-02-25" class="border-bottom"></mt-cell-detail>-->
+      <router-link to="/user/myLike"><mt-cell title="我的收藏" is-link></mt-cell></router-link>
+      <router-link to="/user/dynamic"><mt-cell title="我的动态" is-link></mt-cell></router-link>
+      <router-link to="/user/myTopic"><mt-cell title="我关注的话题" is-link></mt-cell></router-link>
     </div>
     <div class="item-list">
       <mt-button type="danger" style="width: 100%" @click="longout">退出登录</mt-button>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import MtCellDetail from '@/components/cellDetail/cellDetail';
+
   import {mapState,mapMutations} from 'vuex';
   import {imgBaseUrl} from '../../until/config';
   import {setStore} from "../../until/localStorage";
@@ -44,9 +44,6 @@
     },
     computed:{
       ...mapState(['token','userInfo','menu'])
-    },
-    components:{
-      MtCellDetail
     },
     mounted(){
       this.getFollow();
@@ -123,7 +120,7 @@
 
     .item-list{
       background: #fff;
-      margin-bottom: 20px;
+      margin-top: 20px;
       .bottom-shadow;
     }
   }

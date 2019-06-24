@@ -1,11 +1,11 @@
 <!--
- * Create by Zwl on 2019/6/14
- * @Description: 话题列表
+ * Create by Zwl on 2019/6/20
+ * @Description: 我关注的话题
 -->
 
 <template>
   <section class="box">
-    <my-mt-header title="话题列表" leftSlot=""></my-mt-header>
+    <my-mt-header title="我关注的话题"></my-mt-header>
     <ul>
       <li v-for="item in topicList">
         <topic-item :topics="item"></topic-item>
@@ -15,24 +15,23 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import {getTopicList} from "../../service/apiList";
-  import {mapMutations} from 'vuex';
-
   export default {
-    data(){
-      return{
-        topicList:[],
-        imgBaseUrl:''
+    data() {
+      return {
+        topicList:[]
       }
     },
-    mounted(){
+    mounted() {
       this.getTopicList();
-      this.$store.commit('SET_MENU','topic');
     },
-    methods:{
-      ...mapMutations(['SET_MENU']),
+    computed: {
+      ...mapState([ 'userInfo' ])
+    },
+    methods: {
       async getTopicList(){
-        let res = await getTopicList();
+        let res = await getTopicList({userId:this.userInfo._id});
         if(res){
           this.topicList = res.data;
         }

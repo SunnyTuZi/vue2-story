@@ -10,9 +10,9 @@
         <p class="nickname">{{userInfo.username}}</p>
         <p class="synopsis">{{userInfo.autograph}}</p>
         <p class="follow">
-          <a>{{userInfo.fosize}}人关注</a>
+          <a @click="toFollowList">{{userInfo.fosize}}人关注</a>
           <span class="trim">|</span>
-          <a>{{userInfo.bfosize}}个粉丝</a>
+          <a @click="toByFollowList">{{userInfo.bfosize}}个粉丝</a>
         </p>
       </div>
       <slot name="down"></slot>
@@ -31,6 +31,14 @@
       props:['userInfo','token'],
       mounted(){
         this.imgBaseUrl = imgBaseUrl;
+      },
+      methods:{
+        toFollowList(){
+          this.$router.push('/user/followList/'+this.userInfo._id);
+        },
+        toByFollowList(){
+          this.$router.push('/user/byFollowList/'+this.userInfo._id);
+        }
       }
     }
 </script>

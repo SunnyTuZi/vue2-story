@@ -63,7 +63,7 @@
         <comment-list :commentList="item.commentList||[]"></comment-list>
         <page-turner ref="page" :total="item.commentCount" @pageChange="commentPageChange(index)"
                      v-if="item.commentCount > 1"></page-turner>
-        <my-mt-comment ref="comment" @saveComent="commentAdd(index)"></my-mt-comment>
+        <my-mt-comment ref="comment" @saveComent="commentAdd(index)" ></my-mt-comment>
       </div>
     </article>
   </section>
@@ -83,7 +83,8 @@
     data() {
       return {
         imgBaseUrl:'',
-        com_page_size: 2
+        com_page_size: 2,
+        c_content:''
       }
     },
     props: [ 'storyList' ],
@@ -168,6 +169,7 @@
           var comment = Object.assign(result.data,
             {userId:{_id:this.userInfo._id,username: this.userInfo.username, head: this.userInfo.head, sex: this.userInfo.sex}}
           );
+          this.storyList[index].coms += 1;
           this.storyList[index].commentList.push(comment);
           this.$refs.comment[index].commentText = '';
         }
