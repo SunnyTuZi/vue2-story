@@ -7,7 +7,7 @@
   <section class="box">
     <my-mt-header title="我的收藏"></my-mt-header>
     <section class="story-article-list">
-      <story-item :storyList="storyList"></story-item>
+      <story-item v-for="item in storyList" :story="item" :key="item._id"></story-item>
     </section>
   </section>
 </template>

@@ -45,7 +45,7 @@ Vue.component('UserItem',UserItem);
 Vue.component('TopicItem',TopicItem);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
-const socket = io.connect('http://localhost:3000/');
+const socket = io.connect('http://192.168.123.42:3000/');
 
 //设置全局方法
 Vue.prototype.$axios = axios;
