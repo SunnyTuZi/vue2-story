@@ -5,7 +5,7 @@
 
 <template>
   <section class="comment-list">
-    <div class="title">共有{{commentList.length}}条评论</div>
+    <div class="title">共有{{total}}条评论</div>
     <div v-if="commentList.length == 0" class="tips">沙发空着~来做第一个沙发吧~</div>
     <div class="comment-item" v-for="item in commentList">
       <div class="user">
@@ -26,7 +26,7 @@
         imgBaseUrl: imgBaseUrl
       }
     },
-    props: [ 'commentList' ],
+    props: [ 'commentList','total' ],
     mounted() {
 
     }

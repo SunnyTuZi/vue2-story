@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="story-list">
-      <story-item :storyList="storyList"></story-item>
+      <story-item :story="item" v-for="item in storyList" :key="item._id"></story-item>
     </div>
   </section>
 </template>

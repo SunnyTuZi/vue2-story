@@ -4,10 +4,10 @@
 -->
 
 <template>
-  <section class="box">
+  <section class="box" @click="blur">
     <my-mt-header title="消息列表" leftSlot=""></my-mt-header>
     <ul>
-      <li v-for="item in msgList" @click="toChat(item)">
+      <li :class="{active:current == index}" v-for="(item,index) in msgList" @touchstart="startLoop($event,index)" @touchend="stopLoop(item)">
           <div class="head-box">
             <img :src="imgBaseUrl+item.user.head" class="head"/>
             <span class="msg-num" v-if="item.unread > 0">{{item.unread}}</span>
@@ -18,20 +18,25 @@
           </div>
           <div class="date">{{formatDate(item.lastdate)}}</div>
       </li>
-
     </ul>
+    <div class="del-btn" :style="{top:y+'px',left:x+'px'}" v-show="delShow" @click="delSession" >删除列表</div>
   </section>
 </template>
 
 <script>
   import {imgBaseUrl} from "../../until/config";
-  import {getUnReadMsgList} from "../../service/apiList";
+  import {getUnReadMsgList,delMsgByUser} from "../../service/apiList";
   import {mapState,mapMutations} from 'vuex';
   export default {
     data(){
       return{
         msgList:[],
-        imgBaseUrl:''
+        imgBaseUrl:'',
+        timer:null,
+        delShow:false,
+        x:0,
+        y:0,
+        current:null
       }
     },
     mounted(){
@@ -62,6 +67,7 @@
       toChat(item){
         this.$router.push('/user/chat/'+item.user._id+'/'+item.user.username);
       },
+      //信息时间处理
       formatDate(date){
         let now_time = new Date().getTime();
         let msg_time = new Date(date).getTime();
@@ -78,6 +84,45 @@
         if(60*60*60*24<c_time){
           return new Date(date).format('MM-dd');
         }
+      },
+      startLoop(e,index){
+        this.timer = setTimeout(()=>{
+          this.current = index;
+          this.x = e.targetTouches[0].clientX;
+          this.y = e.targetTouches[0].clientY;
+          if(this.x > document.body.clientWidth-70){
+            this.x -= 100;
+          }
+          if(this.y > document.body.clientHeight-30){
+            this.y -= 30;
+          }
+          this.delShow = true;
+        },1000);
+        e.preventDefault();
+      },
+      stopLoop(item){
+        clearTimeout(this.timer);
+        if(!this.delShow){
+          this.toChat(item);
+        }
+
+      },
+      blur(e){
+        this.delBoxHide();
+        e.preventDefault();
+      },
+      async delSession(e){
+        var item = this.msgList[this.current];
+        let result = await delMsgByUser({userId:item.user._id,toUserId:this.userInfo._id});
+        if(result){
+          this.msgList.splice(this.current,1);
+          this.delBoxHide();
+          e.preventDefault();
+        }
+      },
+      delBoxHide(){
+        this.delShow = false;
+        this.current = null;
       }
     }
   }
@@ -127,6 +172,22 @@
           text-align: right;
         }
       }
+    }
+    .del-btn{
+      position: fixed;
+      top: 0;
+      left: 0;
+      font-size: 14px;
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #fff;
+      box-shadow: 1px 1px 2px #ddd;
+      border:1px solid #ddd;
+      border-radius: 3px;
+      z-index: 99;
+    }
+    .active{
+      background-color: #eee;
     }
   }
 </style>

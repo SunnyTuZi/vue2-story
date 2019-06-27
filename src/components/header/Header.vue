@@ -8,7 +8,7 @@
     <mt-header fixed :title="title">
       <div slot="left" >
         <mt-button icon="back"  v-if="leftSlot == 'back'" @click="$router.back(-1)"></mt-button>
-        <mt-button icon="search"  v-if="leftSlot == 'search'" @click="$router.push({path:'/user'})"></mt-button>
+        <mt-button icon="search"  v-if="leftSlot == 'search'" @click="$router.push({path:'/search'})"></mt-button>
       </div>
       <div slot="right">
         <mt-button  v-if="rightSlot == 'user'" class="iconfont icon-me" @click="$router.push({path:'/user'})" ></mt-button>

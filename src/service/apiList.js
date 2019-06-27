@@ -238,6 +238,27 @@ export const getLikeByUser = (data) => getAjax('api/user/getLikeByUser',data);
  */
 export const getCommentByUser = (data) => getAjax('api/user/getCommentByUser',data);
 
+/**
+ * 我的点赞
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getMySupport = (data) => getAjax('api/user/getMySupport',data);
+
+
+/**
+ * 模糊查询故事列表
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const getStoryListByText = (data) => getAjax('api/story/getStoryListByText',data);
+
+/**
+ * 删除回话
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const delMsgByUser = (data) => postAjax('api/chat/delMsgByUser',data);
 
 
 

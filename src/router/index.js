@@ -7,7 +7,7 @@ import { Toast } from 'mint-ui';
 Vue.use(Router);
 
 const continer = () => import('../pages/Continer');
-const userIndex = () => import('../pages/user/index');
+const userIndex = () => import('../pages/user/Index');
 const userEdit = () => import('../pages/user/Edit');
 const userLogin = () => import('../pages/user/Login');
 const userDynamic = () => import('../pages/user/Dynamic');
@@ -26,6 +26,7 @@ const topicList = () => import('../pages/topic/List');
 const topicDetail = () => import('../pages/topic/Detail');
 const myLike = () => import('../pages/user/MyLike');
 const myTopic = () => import('../pages/user/MyTopic');
+const storyDetail = () => import('../pages/story/Detail');
 
 const router = new Router({
   routes: [
@@ -43,7 +44,8 @@ const router = new Router({
       children:[
         {
           path:'story/list',
-          component:storyList
+          component:storyList,
+          meta:{keepAlive:true}
         },
         {
           path:'bubble/list',
@@ -88,7 +90,7 @@ const router = new Router({
     },
 
     {
-      path:'./search',
+      path:'/search',
       component: search
     },
     {
@@ -126,8 +128,23 @@ const router = new Router({
     {
       path:'/user/myTopic',
       component: myTopic
+    },
+    {
+      path:'/story/detail/:id',
+      component: storyDetail
     }
-  ]
+  ],
+  mode:'hash',
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      if (from.meta.keepAlive) {
+        from.meta.savedPosition = document.documentElement.scrollTop;
+      }
+      return { x: 0, y: to.meta.savedPosition || 0 }
+    }
+  }
 });
 
 router.beforeEach((to, from, next) => {

@@ -49,6 +49,7 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;
     align-items: center;
+    background-color: #fff;
     .top-head {
       width: 40px;
       img {

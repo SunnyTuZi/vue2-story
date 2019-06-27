@@ -5,65 +5,73 @@
 
 <template>
   <section>
-    <article class="story-cell" v-for="(item,index) in storyList" :key="item._id">
-      <h1 class="title">{{item.storyName}}</h1>
+    <!--v-if是为了初始化的时候值为undefined-->
+    <article class="story-cell" v-if="story._id">
+      <h1>
+        <router-link :to="'/story/detail/'+story._id" class="title">
+          {{story.storyName}}
+        </router-link>
+      </h1>
       <div class="content">
         <div class="author">
           <div class="cell-list head">
-            <router-link :to="'/user/briefInfo/'+item.userId._id">
-              <img class="img-head" :src="imgBaseUrl + item.userId.head" alt=""/>
+            <router-link :to="'/user/briefInfo/'+story.userId._id">
+              <img class="img-head" :src="imgBaseUrl + story.userId.head" alt=""/>
             </router-link>
           </div>
           <div class="cell-list">
-            <span class="name">{{item.userId.username}}</span>
+            <span class="name">{{story.userId.username}}</span>
           </div>
           <div class="cell-list">
-            <span class="badge">{{item.userId.autograph}}</span>
+            <span class="badge">{{story.userId.autograph}}</span>
           </div>
         </div>
-        <div class="inner">
-          <div class="inner-content" :class="{'hidden-content':!item._check }" v-html="item.storyContent"></div>
-          <div class="inner-more-shadow" v-show="!item._check"></div>
+        <div class="inner" v-if="!isDetail">
+          <div class="inner-content" :class="{'hidden-content':!story._check }" v-html="story.storyContent"></div>
+          <div class="inner-more-shadow" v-show="!story._check"></div>
           <div class="inner-more-btn">
-            <a class="more-btn" @click="checkMore(index)">{{item._check ? '收起' : '更多'}}</a>
+            <a class="more-btn" @click="checkMore(story)">{{story._check ? '收起' : '更多'}}</a>
           </div>
         </div>
-        <div class="send">发表于{{formatDate(item.createDate)}}</div>
+        <div class="inner" v-if="isDetail">
+          <div class="inner-content" v-html="story.storyContent"></div>
+        </div>
+        <div class="send">发表于{{formatDate(story.createDate)}}</div>
       </div>
       <div class="handler">
           <span class="angree">
             <span class="good">
-              <span class="iconfont icon-good" @click="supportStory(index, 1)"
-                    :class="{active:item.supportByUser == 1}"></span>
-              {{item.goods}}
+              <span class="iconfont icon-good" @click="supportStory(story, 1)"
+                    :class="{active:story.supportByUser == 1}"></span>
+              {{story.goods}}
             </span>
             <span class="bad">
-              <span class="iconfont icon-bad" @click="supportStory(index, 2)"
-                    :class="{active:item.supportByUser == 2}"></span>
-              {{item.bads}}
+              <span class="iconfont icon-bad" @click="supportStory(story, 2)"
+                    :class="{active:story.supportByUser == 2}"></span>
+              {{story.bads}}
             </span>
           </span>
-        <span class="comment" @click="showComment(index)">
-            <span v-show="!item.commentShow">
+        <span class="comment" @click="showComment(story)">
+            <span v-show="!story.commentShow">
               <span class="iconfont icon-comment"></span>
-              {{item.coms}}条评论
+              {{story.coms}}条评论
             </span>
-             <span v-show="item.commentShow">
+             <span v-show="story.commentShow">
               <span class="iconfont icon-comment"></span>
               收起评论
             </span>
           </span>
         <span class="collect">
-            <span class="iconfont icon-collect" :class="{'like-active':item.likeByUser}"
-                  @click="likeStory(index)"></span>
+            <span class="iconfont icon-collect" :class="{'like-active':story.likeByUser}"
+                  @click="likeStory(story)"></span>
               收藏
           </span>
       </div>
-      <div class="comment-box" v-show="item.commentShow">
-        <comment-list :commentList="item.commentList||[]"></comment-list>
-        <page-turner ref="page" :total="item.commentCount" @pageChange="commentPageChange(index)"
-                     v-if="item.commentCount > 1"></page-turner>
-        <my-mt-comment ref="comment" @saveComent="commentAdd(index)" ></my-mt-comment>
+      <div class="comment-box" v-show="story.commentShow">
+        <comment-list :commentList="story.commentList||[]" :total="story.coms"></comment-list>
+        <page-turner :ref="'page'+story._id" :total="story.commentCount" @pageChange="commentPageChange(story)"
+                     v-if="story.commentCount > 1"></page-turner>
+        <my-mt-comment :ref="'comment'+story._id" @saveComent="commentAdd(story)" ></my-mt-comment>
       </div>
     </article>
   </section>
@@ -83,11 +91,19 @@
     data() {
       return {
         imgBaseUrl:'',
-        com_page_size: 2,
+        com_page_size: 5,
         c_content:''
       }
     },
-    props: [ 'storyList' ],
+    props: {
+      story:{
+        _id:''
+      },
+      isDetail:{
+        default:false,
+        type:Boolean
+      }
+    },
     mounted(){
       this.imgBaseUrl = imgBaseUrl;
     },
@@ -98,8 +114,8 @@
       /**
        * 更多和收起操作
        */
-      checkMore(index){
-        this.$set(this.storyList[index],'_check',!this.storyList[index]._check);
+      checkMore(item){
+        this.$set(item,'_check',!item._check);
       },
 
       /**
@@ -108,121 +124,122 @@
        * @param userId 用户ID
        * @param status 1：赞||2：踩
        */
-      async supportStory(index,status){
-        let storyId = this.storyList[index]._id;
+      async supportStory(item,status){
+        let storyId = item._id;
         let userId = this.userInfo._id;
-        status = status == this.storyList[index].supportByUser ? 0 : status;
+        status = status == item.supportByUser ? 0 : status;
         let result = await supportStory({storyId,userId,status});
         if(result){
           //如果用户原来的状态是点赞
-          if(this.storyList[index].supportByUser == 1 ){
+          if(item.supportByUser == 1 ){
             //点赞的话就减少1
-            this.storyList[index].goods--;
+            item.goods--;
             //如果是此次操作是踩的话踩加1
             if(status == 2){
-              this.storyList[index].bads++;
+              item.bads++;
             }
           }
           //如果用户原来的状态是踩
-          else if(this.storyList[index].supportByUser == 2){
+          else if(item.supportByUser == 2){
             //踩的话就是取消踩，踩数量减少1
-            this.storyList[index].bads--;
+            item.bads--;
             //赞的话就是赞数量加1
             if(status == 1){
-              this.storyList[index].goods++;
+              item.goods++;
             }
           }else{
             //如果用户原来的状态是无状态，操作的自行加1
-            status == 1 ? this.storyList[index].goods++ : this.storyList[index].bads++;
+            status == 1 ? item.goods++ : item.bads++;
           }
-          this.storyList[index].supportByUser = status;
+          item.supportByUser = status;
         }
       },
       /**
        * 收藏故事
        * @param index 故事列表的序号
        */
-      async likeStory(index){
-        let status = this.storyList[index].likeByUser == 1 ? 0 : 1;
+      async likeStory(item){
+        let status = item.likeByUser == 1 ? 0 : 1;
         const likeForm = {
-          storyId: this.storyList[index]._id,
+          storyId: item._id,
           userId: this.userInfo._id,
           status: status
         }
         let result = await likeStory(likeForm);
         if(result){
-          this.$set(this.storyList[index],'likeByUser',likeForm.status);
+          this.$set(item,'likeByUser',likeForm.status);
         }
       },
       /**
        * 发表评论
        * @param index 故事列表的序号
        */
-      async commentAdd(index){
+      async commentAdd(item){
         const commentForm = {
           userId: this.userInfo._id,
-          storyId: this.storyList[index]._id,
-          commentText: this.$refs.comment[index].commentText
+          storyId: item._id,
+          commentText: this.$refs['comment'+item._id][0].commentText
         }
         let result = await commentAdd(commentForm);
         if(result){
           var comment = Object.assign(result.data,
             {userId:{_id:this.userInfo._id,username: this.userInfo.username, head: this.userInfo.head, sex: this.userInfo.sex}}
           );
-          this.storyList[index].coms += 1;
-          this.storyList[index].commentList.push(comment);
-          this.$refs.comment[index].commentText = '';
+          item.coms += 1;
+          item.commentList.unshift(comment);
+          item.commentList.pop();
+          this.$refs['comment'+item._id][0].commentText = '';
         }
       },
       /**
        * 展示评论
        * @param index 故事列表的序号
        */
-      async showComment(index){
+      async showComment(item){
         //设置评论区的开关状态
-        this.$set(this.storyList[index],'commentShow',!this.storyList[index].commentShow);
+        this.$set(item,'commentShow',!item.commentShow);
         //如果以前打开过，就return，方便下次打开记录内容不至于重新刷新
-        if(this.storyList[index].isOpen) return;
+        if(item.isOpen) return;
         const params = {
-          storyId:this.storyList[index]._id,
+          storyId:item._id,
           page_no: 1,
           page_size: this.com_page_size
         }
         let result = await getCommentList(params);
         if(result){
-          this.$set(this.storyList[index],'commentList',result.data);
-          this.storyList[index].isOpen = true;
-          this.getCommnetTotal(index);
+          this.$set(item,'commentList',result.data);
+          item.isOpen = true;
+          this.getCommnetTotal(item);
         }
       },
       /**
        * 评论翻页
        * @param index 页码
        */
-      async commentPageChange(index){
-        let page_no = this.$refs.page[index].myCurrent || 1;
+      async commentPageChange(item){
+        let page_no = this.$refs['page'+item._id][0].myCurrent || 1;
         const params = {
-          storyId:this.storyList[index]._id,
+          storyId:item._id,
           page_no: page_no,
           page_size: this.com_page_size
         }
         let result = await getCommentList(params);
         if(result){
-          this.$set(this.storyList[index],'commentList',result.data)
+          this.$set(item,'commentList',result.data)
         }
       },
       /**
        * 获取评论总数用于分页
        * @param index
        */
-      async getCommnetTotal(index){
+      async getCommnetTotal(item){
         const params = {
-          storyId:this.storyList[index]._id
+          storyId:item._id
         }
         let result = await getCommentToal(params);
         if(result){
           let total = Math.ceil(result.count/this.com_page_size);
-          this.$set(this.storyList[index],'commentCount',total);
+          this.$set(item,'commentCount',total);
         }
       },
       formatDate(date){
@@ -256,6 +273,7 @@
         .cell-list {
           .name {
             font-size: 14px;
+            margin-left: 5px;
           }
           .badge {
             margin-left: 10px;
