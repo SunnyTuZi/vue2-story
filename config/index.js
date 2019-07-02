@@ -2,7 +2,8 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
+const path = require('path');
+const config = require('./prod.env');
 
 module.exports = {
   dev: {
@@ -12,37 +13,30 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
+        target: config.HOST+':3000', // 你要代理的域名和端口号，要加上http
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/api'
         }
       },
       '/images': {
-        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
+        target: config.HOST+':3000', // 你要代理的域名和端口号，要加上http
         changeOrigin: true,
         pathRewrite: {
           '^/images': '/images'
         }
       },
       '/javascripts': {
-        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
+        target: config.HOST+':3000', // 你要代理的域名和端口号，要加上http
         changeOrigin: true,
         pathRewrite: {
           '^/javascripts': '/javascripts'
-        }
-      },
-      '/socket-story': {
-        target: 'http://localhost:3000', // 你要代理的域名和端口号，要加上http
-        changeOrigin: true,
-        pathRewrite: {
-          '^/socket-story': '/socket-story'
         }
       }
     },
 
     // Various Dev Server settings
-    host: '192.168.123.42', // can be overwritten by process.env.HOST
+    host: config.HOST, // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

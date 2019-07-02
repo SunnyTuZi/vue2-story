@@ -6,6 +6,7 @@ import store from './store';
 import axios from './until/axios';
 import './until/px2rem';
 import './until/common';
+import Config from '../config/prod.env';
 //mint框架
 import Mint from 'mint-ui';
 import  'mint-ui/lib/style.css';
@@ -45,7 +46,7 @@ Vue.component('UserItem',UserItem);
 Vue.component('TopicItem',TopicItem);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
-const socket = io.connect('http://192.168.123.42:3000/');
+const socket = io.connect(Config.HOST+':3000/');
 
 //设置全局方法
 Vue.prototype.$axios = axios;
