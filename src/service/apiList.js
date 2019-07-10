@@ -42,6 +42,13 @@ const getAjax = async(url,data) =>{
 export const login = (data) => postAjax('api/user/login',data);
 
 /**
+ * 检验登陆
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const checkToken = (data) => postAjax('api/user/checkToken',data);
+
+/**
  * 获取验证码图片
  * @returns {Promise<T|*>}
  */
@@ -259,6 +266,13 @@ export const getStoryListByText = (data) => getAjax('api/story/getStoryListByTex
  * @returns {Promise<void>}
  */
 export const delMsgByUser = (data) => postAjax('api/chat/delMsgByUser',data);
+
+/**
+ * 记录访问
+ * @param data
+ * @returns {Promise<void>}
+ */
+export const addRecord = (data) => postAjax('api/visit/addRecord',data);
 
 
 

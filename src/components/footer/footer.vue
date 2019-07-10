@@ -44,6 +44,7 @@
 <script>
   import {getUnReadMsgNum} from "../../service/apiList";
   import {mapState} from 'vuex';
+  import {getStore} from "../../until/localStorage";
 
   export default {
     data() {
@@ -73,9 +74,11 @@
     },
     methods:{
       async getUnReadMsgNum(){
-        let res = await getUnReadMsgNum({_id:this.userInfo._id});
-        if(res){
-          this.unNum = res.data;
+        if(getStore('token')){
+          let res = await getUnReadMsgNum({_id:this.userInfo._id});
+          if(res){
+            this.unNum = res.data;
+          }
         }
       }
     }

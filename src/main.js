@@ -7,6 +7,8 @@ import axios from './until/axios';
 import './until/px2rem';
 import './until/common';
 import Config from '../config/prod.env';
+import {getStore,setStore} from "./until/localStorage";
+import {checkToken,addRecord} from "./service/apiList";
 //mint框架
 import Mint from 'mint-ui';
 import  'mint-ui/lib/style.css';
@@ -28,6 +30,28 @@ import UserItem from './components/user/Item';
 import TopicItem from './components/topic/Item';
 //socket
 
+(async ()=>{
+  //检验登陆状态
+  const token = getStore('token');
+  var userInfo = getStore('userInfo')||'{}';
+  if(token){
+    let result = await checkToken({token});
+    if(!result){
+      setStore('token','');
+      setStore('userInfo','');
+    }
+  }
+  //记录访问
+  userInfo = JSON.parse(userInfo);
+  let data = {
+    ip: returnCitySN[ "cip" ],
+    address: returnCitySN[ "cname" ],
+    userName: userInfo.username || '',
+    userId: userInfo.userId || ''
+  }
+  await addRecord(data);
+})();
+
 Vue.config.productionTip = false
 
 Vue.use(Mint);
@@ -47,6 +71,7 @@ Vue.component('TopicItem',TopicItem);
 Vue.use(VueHtml5Editor,ediotrDeploy);
 
 const socket = io.connect(Config.HOST+':3000/');
+
 
 //设置全局方法
 Vue.prototype.$axios = axios;

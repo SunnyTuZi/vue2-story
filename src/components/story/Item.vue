@@ -217,7 +217,8 @@
        * @param index 页码
        */
       async commentPageChange(item){
-        let page_no = this.$refs['page'+item._id][0].myCurrent || 1;
+        let page_no = this.$refs['page'+item._id].myCurrent || 1;
+
         const params = {
           storyId:item._id,
           page_no: page_no,

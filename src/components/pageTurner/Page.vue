@@ -15,7 +15,7 @@
   export default {
     data(){
       return{
-        myCurrent:this.current,
+        myCurrent:1,
         myTotal:[]
       }
     },
@@ -37,6 +37,7 @@
       }
     },
     mounted(){
+      this.myCurrent = this.current;
       this.morePageHandler();
     },
     methods:{
