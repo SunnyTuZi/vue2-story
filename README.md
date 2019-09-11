@@ -28,8 +28,6 @@ npm run dev
 
 如果想体验前后台同时开发，可以下载后台系统，并且自行安装mongoDB。
 
-此时启动本项目的命令为：npm run local 而不是 npm run dev。
-
 同时我们也提供了基于`react&antd`搭建的[后台管理页面传送地址](https://github.com/SunnyTuZi/react-story-admin.git)
 
 如果只做前端开发，请忽略上面这几句话哟～
@@ -173,6 +171,6 @@ npm run dev
 .
 
 ```
-#接口
-1、koa的服务接口接口 [地址在这里](https://github.com/SunnyTuZi/vue2-story/blob/master/apiList.html)
+### 接口
+>   koa的服务接口(页面解析时间可能比较长) [地址在这里](http://htmlpreview.github.io/?https://github.com/SunnyTuZi/vue2-story/blob/master/apiList.html)
 # License
