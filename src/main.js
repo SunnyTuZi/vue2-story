@@ -43,11 +43,13 @@ import TopicItem from './components/topic/Item';
   }
   //记录访问
   userInfo = JSON.parse(userInfo);
+  let v_type = userInfo._id ? 1:0;
   let data = {
     ip: returnCitySN[ "cip" ],
     address: returnCitySN[ "cname" ],
     userName: userInfo.username || '',
-    userId: userInfo.userId || ''
+    userId: userInfo._id || '',
+    v_type:v_type
   }
   await addRecord(data);
 })();

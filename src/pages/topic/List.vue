@@ -32,7 +32,7 @@
     methods:{
       ...mapMutations(['SET_MENU']),
       async getTopicList(){
-        let res = await getTopicList();
+        let res = await getTopicList({status:1});
         if(res){
           this.topicList = res.data;
         }

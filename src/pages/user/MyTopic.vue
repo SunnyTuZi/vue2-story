@@ -31,7 +31,7 @@
     },
     methods: {
       async getTopicList(){
-        let res = await getTopicList({userId:this.userInfo._id});
+        let res = await getTopicList({userId:this.userInfo._id,status:1});
         if(res){
           this.topicList = res.data;
         }
