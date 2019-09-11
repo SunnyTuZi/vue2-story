@@ -86,7 +86,7 @@ npm run dev
 
 ### 故事列表页
 
-<img src="https://github.com/SunnyTuZi/vue2-story/showImages/index.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/showImages/storyDetail.jpg" width="365" height="619"/>
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/index.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/storyDetail.jpg" width="365" height="619"/>
 
 
 
@@ -173,5 +173,6 @@ npm run dev
 .
 
 ```
-
+#接口
+1、koa的服务接口接口 [地址在这里](https://github.com/SunnyTuZi/vue2-story/blob/master/apiList.html)
 # License
