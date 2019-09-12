@@ -24,13 +24,11 @@ npm run dev
 ```
 ## 关于接口数据
 
-此项目的所有接口数据都来源于配套的后台系统，[后台项目传送地址](https://github.com/SunnyTuZi/koa2-story.git)。
-
-如果想体验前后台同时开发，可以下载后台系统，并且自行安装mongoDB。
+由于本系统用的不是静态数据，所以要跑起来的话，还需要搭配后台运行。[后台项目传送地址](https://github.com/SunnyTuZi/koa2-story.git)。
 
 同时我们也提供了基于`react&antd`搭建的[后台管理页面传送地址](https://github.com/SunnyTuZi/react-story-admin.git)
 
-如果只做前端开发，请忽略上面这几句话哟～
+学习不是一天两天的事，希望大家多点耐心哟～
 
 
 # 说明
