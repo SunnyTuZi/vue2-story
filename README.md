@@ -86,6 +86,21 @@ npm run dev
 
 <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/index.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/storyDetail.jpg" width="365" height="619"/>
 
+### 话题列表页
+
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/topic.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/topicDetail.jpg" width="365" height="619"/>
+
+
+### 聊天&分组
+
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/group.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/groupChat.jpg" width="365" height="619"/>
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/addGroup.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/msg.jpg" width="365" height="619"/>
+
+### 用户
+
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/login.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/user.jpg" width="365" height="619"/>
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/selfHome.jpg" width="365" height="619"/> <img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/userEdit.jpg" width="365" height="619"/>
+<img src="https://github.com/SunnyTuZi/vue2-story/blob/master/showImages/myDynamic.jpg" width="365" height="619"/>
 
 
 # 项目布局
@@ -171,6 +186,4 @@ npm run dev
 .
 
 ```
-### 接口
->   koa的服务接口(页面解析时间可能比较长) [地址在这里](http://htmlpreview.github.io/?https://github.com/SunnyTuZi/vue2-story/blob/master/apiList.html)
 # License
