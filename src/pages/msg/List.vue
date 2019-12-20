@@ -47,6 +47,8 @@
         this.$socket.emit('login',this.userInfo);
         this.$socket.on('privateChatMsg',()=>{
           this.getUnReadMsgList();
+
+
         });
       }
       this.$store.commit('SET_MENU','msg');

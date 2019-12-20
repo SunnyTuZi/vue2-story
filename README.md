@@ -21,6 +21,8 @@ npm install 或 yarn(推荐)
 
 npm run dev
 
+访问地址：http://localhost:8080/
+
 ```
 ## 关于接口数据
 

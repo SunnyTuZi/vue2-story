@@ -50,11 +50,11 @@
       this.imgBaseUrl = imgBaseUrl;
 
       this.$socket.emit('login',this.userInfo);
-
       this.groupId = new Array([this.userInfo._id,this.toUserId]).sort((a,b)=> a-b).toString();
       this.chat[this.groupId] = this.chat[this.groupId]||[];
       this.chatRecord = this.chat[this.groupId];
       this.$socket.on('privateChatMsg',(data)=>{
+        debugger;
         let groupId = this.groupId;
         this.$store.commit('SET_CHAT',{groupId, data});
       });
