@@ -16,7 +16,7 @@
     "axios": "^0.18.0",
     "mint-ui": "^2.2.13",
     "px2rem-loader": "^0.1.9",
-    "qs": "^6.8.0",
+    "qs": "^6.5.3",
     "socket.io-client": "^2.2.0",
     "vue": "^2.5.2",
     "vue-html5-editor": "^1.1.1",
